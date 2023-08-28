@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gamefinity/widgets/sale_widget.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -10,31 +11,26 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  late TextEditingController textEditingController;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  @override
+  void initState() {
+    textEditingController = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    textEditingController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      initialIndex: 0,
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         appBar: AppBar(
-          bottom: TabBar(
-            tabs: [
-              Tab(
-                text: 'Explore',
-              ),
-              Tab(
-                text: 'Play',
-              ),
-            ],
-          ),
           actions: [
             IconButton.outlined(
               onPressed: () {},
@@ -48,18 +44,35 @@ class _MyHomePageState extends State<MyHomePage> {
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
           title: Text(widget.title),
         ),
-        body: Center(
-          child: TabBarView(
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
             children: [
-              Icon(Icons.android),
-              Icon(Icons.phone_iphone),
+              SizedBox(height: 18.0),
+              TextField(
+                controller: textEditingController,
+                keyboardType: TextInputType.text,
+                decoration: InputDecoration(
+                  hintText: 'Search',
+                  filled: true,
+                  fillColor: Theme.of(context).cardColor,
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: BorderSide(color: Theme.of(context).cardColor),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: BorderSide(
+                      width: 1,
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
+                  ),
+                  suffixIcon: const Icon(Icons.search),
+                ),
+              ),
+              const SaleWidget(),
             ],
           ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: _incrementCounter,
-          tooltip: 'Increment',
-          child: const Icon(Icons.add),
         ),
       ),
     );
