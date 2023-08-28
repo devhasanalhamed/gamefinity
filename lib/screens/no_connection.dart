@@ -11,7 +11,7 @@ class NoConnection extends StatefulWidget {
 }
 
 class _NoConnectionState extends State<NoConnection> {
-  bool _isConnected = false;
+  bool _isConnected = true;
   get isConnected => _isConnected;
 
   @override
@@ -27,7 +27,7 @@ class _NoConnectionState extends State<NoConnection> {
       if (result == true) {
         _isConnected = true;
       } else {
-        _isConnected = false;
+        _isConnected = true;
       }
     });
   }
