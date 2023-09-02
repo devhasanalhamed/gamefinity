@@ -2,6 +2,7 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:gamefinity/screens/all_products_screen.dart';
 import 'package:gamefinity/screens/category_screen.dart';
+import 'package:gamefinity/screens/developers_screen.dart';
 import 'package:gamefinity/widgets/product_widget.dart';
 import 'package:gamefinity/widgets/sale_widget.dart';
 import 'package:page_transition/page_transition.dart';
@@ -57,7 +58,14 @@ class _MyHomePageState extends State<MyHomePage> {
               icon: const Icon(Icons.gamepad_outlined),
             ),
             IconButton.outlined(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    PageTransition(
+                      child: const DevelopersScreen(),
+                      type: PageTransitionType.fade,
+                    ));
+              },
               icon: const Icon(Icons.import_contacts),
             ),
           ],
@@ -90,6 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   suffixIcon: const Icon(Icons.search),
                 ),
               ),
+              const SizedBox(height: 18.0),
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
