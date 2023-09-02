@@ -68,7 +68,7 @@ class ProductWidgetState extends State<ProductWidget> {
               borderRadius: BorderRadius.circular(12),
               child: FancyShimmerImage(
                 imageUrl:
-                    'https://images.dsw.com/is/image/DSWShoes/533780_035_ss_01?impolicy=qlt-medium-high&imwidth=640&imdensity=2',
+                    'https://picsum.photos/200',
                 height: size.height * 0.2,
                 width: double.infinity,
                 boxFit: BoxFit.fill,

@@ -79,7 +79,7 @@ class SaleWidgetState extends State<SaleWidget> {
             child: Padding(
               padding: const EdgeInsets.all(14.0),
               child: Image.network(
-                'https://www.google.com/images/branding/googlelogo/2x/googlelogo_light_color_272x92dp.png',
+                'https://picsum.photos/200',
                 width: double.infinity,
                 fit: BoxFit.contain,
               ),
