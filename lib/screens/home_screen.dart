@@ -3,20 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:gamefinity/screens/all_products_screen.dart';
 import 'package:gamefinity/screens/category_screen.dart';
 import 'package:gamefinity/screens/developers_screen.dart';
+import 'package:gamefinity/services/api_handler.dart';
 import 'package:gamefinity/widgets/product_widget.dart';
 import 'package:gamefinity/widgets/sale_widget.dart';
 import 'package:page_transition/page_transition.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key, required this.title});
 
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _HomeScreenState extends State<HomeScreen> {
   late TextEditingController textEditingController;
 
   @override
@@ -29,6 +30,12 @@ class _MyHomePageState extends State<MyHomePage> {
   void dispose() {
     textEditingController.dispose();
     super.dispose();
+  }
+
+  @override
+  void didChangeDependencies() {
+    APIHandler.getAllProducts();
+    super.didChangeDependencies();
   }
 
   @override
