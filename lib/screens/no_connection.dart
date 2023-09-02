@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:gamefinity/screens/homepage_screen.dart';
+import 'package:gamefinity/screens/home_screen.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class NoConnection extends StatefulWidget {
@@ -35,7 +35,7 @@ class _NoConnectionState extends State<NoConnection> {
   @override
   Widget build(BuildContext context) {
     return isConnected
-        ? const MyHomePage(
+        ? const HomeScreen(
             title: 'Gamefinity',
           )
         : Center(
