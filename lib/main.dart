@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gamefinity/screens/homepage_screen.dart';
 import 'package:gamefinity/screens/no_connection.dart';
 
 import 'global/theme.dart';
