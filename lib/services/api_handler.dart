@@ -1,10 +1,17 @@
+import 'package:gamefinity/consts/api_consts.dart';
+import 'package:gamefinity/models/products_model.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class APIHandler {
-  static Future<void> getAllProducts() async {
-    const url = 'https://api.escuelajs.co/api/v1/products';
-    final response = await http.get(Uri.parse(url));
-    print('response: ${jsonDecode(response.body)}');
+  static Future<List<ProductsModel>> getAllProducts() async {
+    final uri = Uri.https(BASE_URL, 'api/v1/products');
+    final response = await http.get(uri);
+    final responseData = jsonDecode(response.body);
+    List temp = [];
+    for (var value in responseData) {
+      temp.add(value);
+    }
+    return ProductsModel.productsFromSnapshot(temp);
   }
 }
