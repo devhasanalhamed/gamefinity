@@ -4,7 +4,13 @@ import 'package:gamefinity/screens/product_details_screen.dart';
 import 'package:page_transition/page_transition.dart';
 
 class ProductWidget extends StatefulWidget {
-  const ProductWidget({Key? key}) : super(key: key);
+  final String title;
+  final String imgUrl;
+  const ProductWidget({
+    Key? key,
+    required this.title,
+    required this.imgUrl,
+  }) : super(key: key);
 
   @override
   ProductWidgetState createState() => ProductWidgetState();
@@ -67,21 +73,20 @@ class ProductWidgetState extends State<ProductWidget> {
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
               child: FancyShimmerImage(
-                imageUrl:
-                    'https://picsum.photos/200',
+                imageUrl: widget.imgUrl,
                 height: size.height * 0.2,
                 width: double.infinity,
                 boxFit: BoxFit.fill,
               ),
             ),
             const SizedBox(height: 10.0),
-            const Padding(
-              padding: EdgeInsets.all(8.0),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
               child: Text(
-                'Title',
+                widget.title,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 17,
                   fontWeight: FontWeight.w700,
                 ),
