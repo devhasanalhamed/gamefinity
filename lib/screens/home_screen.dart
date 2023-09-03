@@ -1,5 +1,6 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
+import 'package:gamefinity/models/products_model.dart';
 import 'package:gamefinity/screens/all_products_screen.dart';
 import 'package:gamefinity/screens/category_screen.dart';
 import 'package:gamefinity/screens/developers_screen.dart';
@@ -7,6 +8,7 @@ import 'package:gamefinity/services/api_handler.dart';
 import 'package:gamefinity/widgets/product_widget.dart';
 import 'package:gamefinity/widgets/sale_widget.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key, required this.title});
@@ -32,14 +34,22 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
   }
 
+  List<ProductsModel> productsList = [];
   @override
   void didChangeDependencies() {
-    APIHandler.getAllProducts();
+    print('didChanged Triggered');
+    getData();
     super.didChangeDependencies();
+  }
+
+  Future<void> getData() async {
+    productsList = await APIHandler.getAllProducts();
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
+    final ProductsModel productsModelProvider = Provider.of<ProductsModel>(context);
     Size size = MediaQuery.of(context).size;
 
     return GestureDetector(
@@ -132,7 +142,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             onPressed: () {
                               Navigator.of(context).push(
                                 PageTransition(
-                                  child: const AllProductsScreen(),
+                                  child: AllProductsScreen(
+                                      productsList: productsList),
                                   type: PageTransitionType.fade,
                                 ),
                               );
@@ -143,19 +154,44 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ],
                       ),
-                      GridView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: 3,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          childAspectRatio: 0.6,
-                          crossAxisSpacing: 0.0,
-                          mainAxisSpacing: 0.0,
-                        ),
-                        itemBuilder: (context, index) {
-                          return const ProductWidget();
+                      FutureBuilder(
+                        future: APIHandler.getAllProducts(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return const Center(
+                              child: CircularProgressIndicator(
+                                color: Colors.amber,
+                              ),
+                            );
+                          } else if (snapshot.hasError) {
+                            return const Center(
+                              child: Text('An Error Occure'),
+                            );
+                          } else if (snapshot.data == null) {
+                            return const Center(
+                              child: Text('There are no proudcts yet'),
+                            );
+                          } else {
+                            return GridView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: productsList.length,
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                childAspectRatio: 0.6,
+                                crossAxisSpacing: 8.0,
+                                mainAxisSpacing: 8.0,
+                              ),
+                              itemBuilder: (context, index) {
+                                return ProductWidget(
+                                  title: productsList[index].title!,
+                                  imgUrl: productsList[index].images![0],
+                                );
+                              },
+                            );
+                          }
                         },
                       ),
                     ],
