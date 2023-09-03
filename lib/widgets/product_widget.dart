@@ -1,16 +1,12 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
+import 'package:gamefinity/models/products_model.dart';
 import 'package:gamefinity/screens/product_details_screen.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
 
 class ProductWidget extends StatefulWidget {
-  final String title;
-  final String imgUrl;
-  const ProductWidget({
-    Key? key,
-    required this.title,
-    required this.imgUrl,
-  }) : super(key: key);
+  const ProductWidget({Key? key}) : super(key: key);
 
   @override
   ProductWidgetState createState() => ProductWidgetState();
@@ -19,6 +15,8 @@ class ProductWidget extends StatefulWidget {
 class ProductWidgetState extends State<ProductWidget> {
   @override
   Widget build(BuildContext context) {
+    final ProductsModel productsModelProvider =
+        Provider.of<ProductsModel>(context);
     final size = MediaQuery.of(context).size;
     return Material(
       borderRadius: BorderRadius.circular(8.0),
@@ -48,15 +46,15 @@ class ProductWidgetState extends State<ProductWidget> {
                 children: [
                   Flexible(
                     child: RichText(
-                      text: const TextSpan(
+                      text:  TextSpan(
                         text: '\$',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Color.fromRGBO(33, 150, 243, 1),
                         ),
                         children: <TextSpan>[
                           TextSpan(
-                            text: '168.00',
-                            style: TextStyle(
+                            text: '${productsModelProvider.price}',
+                            style: const TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.w600,
                             ),
@@ -73,7 +71,7 @@ class ProductWidgetState extends State<ProductWidget> {
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
               child: FancyShimmerImage(
-                imageUrl: widget.imgUrl,
+                imageUrl: productsModelProvider.images![0],
                 height: size.height * 0.2,
                 width: double.infinity,
                 boxFit: BoxFit.fill,
@@ -83,7 +81,7 @@ class ProductWidgetState extends State<ProductWidget> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                widget.title,
+                productsModelProvider.title!,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
                 style: const TextStyle(

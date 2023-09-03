@@ -49,7 +49,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final ProductsModel productsModelProvider = Provider.of<ProductsModel>(context);
     Size size = MediaQuery.of(context).size;
 
     return GestureDetector(
@@ -185,10 +184,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 mainAxisSpacing: 8.0,
                               ),
                               itemBuilder: (context, index) {
-                                return ProductWidget(
-                                  title: productsList[index].title!,
-                                  imgUrl: productsList[index].images![0],
-                                );
+                                return ChangeNotifierProvider.value(
+                                    value: productsList[index],
+                                    child: const ProductWidget());
                               },
                             );
                           }

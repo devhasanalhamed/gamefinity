@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gamefinity/models/products_model.dart';
 import 'package:gamefinity/widgets/product_widget.dart';
+import 'package:provider/provider.dart';
 
 class AllProductsScreen extends StatelessWidget {
   final List<ProductsModel> productsList;
@@ -31,9 +32,9 @@ class AllProductsScreen extends StatelessWidget {
                 mainAxisSpacing: 8.0,
               ),
               itemBuilder: (context, index) {
-                return ProductWidget(
-                  title: productsList[index].title!,
-                  imgUrl: productsList[index].images![0],
+                return ChangeNotifierProvider.value(
+                  value: productsList[index],
+                  child: const ProductWidget(),
                 );
               },
             ),
