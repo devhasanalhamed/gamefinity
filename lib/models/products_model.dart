@@ -1,6 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:gamefinity/models/category_model.dart';
 
-class ProductsModel {
+class ProductsModel with ChangeNotifier {
   int? id;
   String? title;
   int? price;
@@ -32,5 +33,11 @@ class ProductsModel {
     category = json['category'] != null
         ? CategoriesModel.fromJson(json['category'])
         : null;
+  }
+
+  static List<ProductsModel> productsFromSnapshot(List productSnapshot) {
+    return productSnapshot
+        .map((singleProduct) => ProductsModel.fromJson(singleProduct))
+        .toList();
   }
 }
