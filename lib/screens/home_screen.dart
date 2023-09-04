@@ -153,7 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ],
                       ),
-                      FutureBuilder(
+                      FutureBuilder<List<ProductsModel>>(
                         future: APIHandler.getAllProducts(),
                         builder: (context, snapshot) {
                           if (snapshot.connectionState ==
@@ -175,7 +175,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             return GridView.builder(
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
-                              itemCount: productsList.length,
+                              itemCount: snapshot.data!.length,
                               gridDelegate:
                                   const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2,
@@ -185,7 +185,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               itemBuilder: (context, index) {
                                 return ChangeNotifierProvider.value(
-                                    value: productsList[index],
+                                    value: snapshot.data![index],
                                     child: const ProductWidget());
                               },
                             );
