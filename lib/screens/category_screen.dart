@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gamefinity/models/category_model.dart';
+import 'package:gamefinity/models/categories_model.dart';
 import 'package:gamefinity/services/api_handler.dart';
 import 'package:gamefinity/widgets/category_widget.dart';
 import 'package:provider/provider.dart';
