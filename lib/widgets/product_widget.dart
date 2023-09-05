@@ -28,7 +28,7 @@ class ProductWidgetState extends State<ProductWidget> {
             context,
             PageTransition(
               type: PageTransitionType.fade,
-              child: const ProductDetailsScreen(),
+              child:  ProductDetailsScreen(id: productsModelProvider.id!),
             ),
           );
         },
