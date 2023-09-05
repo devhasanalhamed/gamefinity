@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:gamefinity/models/users_model.dart';
+import 'package:gamefinity/services/api_handler.dart';
 import 'package:gamefinity/widgets/developer_widget.dart';
+import 'package:provider/provider.dart';
 
 class DevelopersScreen extends StatefulWidget {
   const DevelopersScreen({Key? key}) : super(key: key);
@@ -15,9 +18,34 @@ class DevelopersScreenState extends State<DevelopersScreen> {
       appBar: AppBar(
         title: const Text('Developers'),
       ),
-      body: ListView.builder(
-        itemCount: 10,
-        itemBuilder: (ctx, index) => const DeveloperWidget(),
+      body: FutureBuilder<List<UsersModel>>(
+        future: APIHandler.getUsers(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(
+                color: Colors.amber,
+              ),
+            );
+          } else if (snapshot.hasError) {
+            return const Center(
+              child: Text('An Error Occure'),
+            );
+          } else if (snapshot.data == null) {
+            return const Center(
+              child: Text('There are no proudcts yet'),
+            );
+          } else {
+            return ListView.builder(
+              shrinkWrap: true,
+              itemCount: snapshot.data!.length,
+              itemBuilder: (context, index) => ChangeNotifierProvider.value(
+                value: snapshot.data![index],
+                child: const DeveloperWidget(),
+              ),
+            );
+          }
+        },
       ),
     );
   }
