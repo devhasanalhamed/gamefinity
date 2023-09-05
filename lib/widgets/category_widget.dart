@@ -1,7 +1,7 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:gamefinity/global/theme.dart';
-import 'package:gamefinity/models/category_model.dart';
+import 'package:gamefinity/models/categories_model.dart';
 import 'package:provider/provider.dart';
 
 class CategoryWidget extends StatelessWidget {
