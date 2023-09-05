@@ -7,16 +7,24 @@ import 'dart:convert';
 
 class APIHandler {
   static Future<List<dynamic>> getData({required String target}) async {
-    final uri = Uri.https(BASE_URL, "api/v1/$target");
-    final response = await http.get(uri);
+    try {
+      final uri = Uri.https(BASE_URL, "api/v1/$target");
+      final response = await http.get(uri);
 
-    final responseData = jsonDecode(response.body);
-    List temp = [];
-    for (var value in responseData) {
-      temp.add(value);
+      final responseData = jsonDecode(response.body);
+      if (response.statusCode != 200) {
+        throw responseData['message'];
+      }
+      List temp = [];
+      for (var value in responseData) {
+        temp.add(value);
+      }
+
+      return temp;
+    } catch (error) {
+      print('an error occured while getting product info $error');
+      throw '$error';
     }
-
-    return temp;
   }
 
   static Future<List<ProductsModel>> getAllProducts() async {
@@ -31,7 +39,22 @@ class APIHandler {
 
   static Future<List<UsersModel>> getUsers() async {
     final temp = await getData(target: 'users');
-    print(temp);
     return UsersModel.usersFromSnapshot(temp);
+  }
+
+  static Future<ProductsModel> getProductByID({required String id}) async {
+    try {
+      final uri = Uri.https(BASE_URL, "api/v1/products/$id");
+      final response = await http.get(uri);
+
+      final responseData = jsonDecode(response.body);
+      if (response.statusCode != 200) {
+        throw responseData['message'];
+      }
+      return ProductsModel.fromJson(responseData);
+    } catch (error) {
+      print('an error occured while getting product info $error');
+      throw '$error';
+    }
   }
 }
