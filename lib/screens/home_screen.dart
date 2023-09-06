@@ -141,8 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             onPressed: () {
                               Navigator.of(context).push(
                                 PageTransition(
-                                  child: AllProductsScreen(
-                                      productsList: productsList),
+                                  child: const AllProductsScreen(),
                                   type: PageTransitionType.fade,
                                 ),
                               );
