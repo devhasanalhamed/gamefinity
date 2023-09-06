@@ -43,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> getData() async {
-    productsList = await APIHandler.getAllProducts();
+    productsList = await APIHandler.getAllProducts(limit: '3');
     setState(() {});
   }
 
@@ -154,7 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                       FutureBuilder<List<ProductsModel>>(
-                        future: APIHandler.getAllProducts(),
+                        future: APIHandler.getAllProducts(limit: '3'),
                         builder: (context, snapshot) {
                           if (snapshot.connectionState ==
                               ConnectionState.waiting) {
