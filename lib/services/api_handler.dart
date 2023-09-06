@@ -6,9 +6,21 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class APIHandler {
-  static Future<List<dynamic>> getData({required String target}) async {
+  static Future<List<dynamic>> getData({
+    required String target,
+    String? limit,
+  }) async {
     try {
-      final uri = Uri.https(BASE_URL, "api/v1/$target");
+      final uri = Uri.https(
+        BASE_URL,
+        "api/v1/$target",
+        target == 'products'
+            ? {
+                'offset': '0',
+                'limit': limit,
+              }
+            : {},
+      );
       final response = await http.get(uri);
 
       final responseData = jsonDecode(response.body);
@@ -27,8 +39,9 @@ class APIHandler {
     }
   }
 
-  static Future<List<ProductsModel>> getAllProducts() async {
-    final temp = await getData(target: 'products');
+  static Future<List<ProductsModel>> getAllProducts(
+      {required String limit}) async {
+    final temp = await getData(target: 'products', limit: limit);
     return ProductsModel.productsFromSnapshot(temp);
   }
 
