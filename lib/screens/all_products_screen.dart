@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:gamefinity/models/products_model.dart';
 import 'package:gamefinity/services/api_handler.dart';
@@ -14,7 +16,6 @@ class AllProductsScreen extends StatefulWidget {
 class _AllProductsScreenState extends State<AllProductsScreen> {
   List<ProductsModel> productsList = [];
   int limit = 10;
-  bool _isLoading = false;
   bool _isLimit = false;
 
   final ScrollController _scrollcontroller = ScrollController();
@@ -32,10 +33,12 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
       () async {
         if (_scrollcontroller.position.pixels ==
             _scrollcontroller.position.maxScrollExtent) {
-          _isLoading = true;
           limit += 10;
+          log('$limit');
+          if (limit == 200) {
+            _isLimit = true;
+          }
           await getData();
-          _isLoading = false;
         }
       },
     );
@@ -65,10 +68,10 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
               ),
             )
           : SingleChildScrollView(
+              controller: _scrollcontroller,
               child: Column(
                 children: [
                   GridView.builder(
-                    controller: _scrollcontroller,
                     itemCount: productsList.length,
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
@@ -86,9 +89,10 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
                       );
                     },
                   ),
-                  const CircularProgressIndicator(
-                    color: Colors.amber,
-                  ),
+                  if (_isLimit)
+                    const CircularProgressIndicator(
+                      color: Colors.amber,
+                    ),
                 ],
               ),
             ),
