@@ -37,6 +37,8 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
           log('$limit');
           if (limit == 200) {
             _isLimit = true;
+            setState(() {});
+            return;
           }
           await getData();
         }
