@@ -50,6 +50,9 @@ class MyApp extends StatelessWidget {
               secondary: lightIconsColor,
               brightness: Brightness.light,
             ),
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          selectedItemColor: lightIconsColor,
+        ),
       ),
       home: const NoConnection(),
     );
