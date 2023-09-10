@@ -13,21 +13,24 @@ class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
   @override
-  _HomeState createState() => _HomeState();
+  HomeState createState() => HomeState();
 }
 
-class _HomeState extends State<Home> {
+class HomeState extends State<Home> {
   late TextEditingController textEditingController;
+  late SwiperController swiperController;
 
   @override
   void initState() {
     textEditingController = TextEditingController();
+    swiperController = SwiperController();
     super.initState();
   }
 
   @override
   void dispose() {
     textEditingController.dispose();
+    swiperController.dispose();
     super.dispose();
   }
 
@@ -94,7 +97,7 @@ class _HomeState extends State<Home> {
                             color: Colors.white,
                           ),
                         ),
-                        autoplay: true,
+                        controller: swiperController,
                       ),
                     ),
                   ),
