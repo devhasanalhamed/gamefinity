@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gamefinity/helpers/size_config.dart';
 import 'package:gamefinity/screens/category_screen.dart';
 import 'package:gamefinity/screens/developers_screen.dart';
 import 'package:gamefinity/widgets/home.dart';
@@ -24,6 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
