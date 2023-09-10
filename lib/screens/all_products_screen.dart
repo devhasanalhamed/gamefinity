@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:gamefinity/helpers/size_config.dart';
 import 'package:gamefinity/models/products_model.dart';
 import 'package:gamefinity/services/api_handler.dart';
 import 'package:gamefinity/widgets/product_widget.dart';
@@ -18,7 +19,7 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
   int limit = 10;
   bool _isLimit = false;
 
-  final ScrollController _scrollcontroller = ScrollController();
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
@@ -29,10 +30,10 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _scrollcontroller.addListener(
+    _scrollController.addListener(
       () async {
-        if (_scrollcontroller.position.pixels ==
-            _scrollcontroller.position.maxScrollExtent) {
+        if (_scrollController.position.pixels ==
+            _scrollController.position.maxScrollExtent) {
           limit += 10;
           log('$limit');
           if (limit == 200) {
@@ -53,51 +54,54 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
 
   @override
   void dispose() {
-    _scrollcontroller.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('All products'),
       ),
-      body: productsList.isEmpty
-          ? const Center(
-              child: CircularProgressIndicator(
-                color: Colors.amber,
-              ),
-            )
-          : SingleChildScrollView(
-              controller: _scrollcontroller,
-              child: Column(
-                children: [
-                  GridView.builder(
-                    itemCount: productsList.length,
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 0.6,
-                      crossAxisSpacing: 8.0,
-                      mainAxisSpacing: 8.0,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: productsList.isEmpty
+            ? const Center(
+                child: CircularProgressIndicator(
+                  color: Colors.amber,
+                ),
+              )
+            : SingleChildScrollView(
+                controller: _scrollController,
+                child: Column(
+                  children: [
+                    GridView.builder(
+                      itemCount: productsList.length,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: SizeConfig.screenWidth! ~/ 150,
+                        mainAxisExtent: 280,
+                        crossAxisSpacing: 8.0,
+                        mainAxisSpacing: 16.0,
+                      ),
+                      itemBuilder: (context, index) {
+                        return ChangeNotifierProvider.value(
+                          value: productsList[index],
+                          child: const ProductWidget(),
+                        );
+                      },
                     ),
-                    itemBuilder: (context, index) {
-                      return ChangeNotifierProvider.value(
-                        value: productsList[index],
-                        child: const ProductWidget(),
-                      );
-                    },
-                  ),
-                  if (!_isLimit)
-                    const CircularProgressIndicator(
-                      color: Colors.amber,
-                    ),
-                ],
+                    if (!_isLimit)
+                      const CircularProgressIndicator(
+                        color: Colors.amber,
+                      ),
+                  ],
+                ),
               ),
-            ),
+      ),
     );
   }
 }
