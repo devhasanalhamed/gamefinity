@@ -1,5 +1,6 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
+import 'package:gamefinity/helpers/size_config.dart';
 import 'package:gamefinity/models/products_model.dart';
 import 'package:gamefinity/screens/all_products_screen.dart';
 import 'package:gamefinity/services/api_handler.dart';
@@ -45,7 +46,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    SizeConfig().init(context);
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -77,19 +78,24 @@ class _HomeState extends State<Home> {
           Expanded(
             child: SingleChildScrollView(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    height: size.height * 0.25,
-                    child: Swiper(
-                      itemCount: 3,
-                      itemBuilder: (ctx, index) => const SaleWidget(),
-                      pagination: const SwiperPagination(
-                        builder: DotSwiperPaginationBuilder(
-                          activeColor: Colors.red,
-                          color: Colors.white,
+                    height: SizeConfig.blockSizeVertical! * 25,
+                    child: AspectRatio(
+                      aspectRatio: 2 / 1,
+                      child: Swiper(
+                        itemCount: 3,
+                        itemBuilder: (ctx, index) => const SaleWidget(),
+                        pagination: const SwiperPagination(
+                          builder: DotSwiperPaginationBuilder(
+                            activeColor: Colors.red,
+                            color: Colors.white,
+                          ),
                         ),
+                        autoplay: true,
                       ),
-                      autoplay: true,
                     ),
                   ),
                   Row(
@@ -134,9 +140,9 @@ class _HomeState extends State<Home> {
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: snapshot.data!.length,
                           gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            childAspectRatio: 0.6,
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: SizeConfig.screenWidth! ~/ 150,
+                            mainAxisExtent: 280,
                             crossAxisSpacing: 8.0,
                             mainAxisSpacing: 8.0,
                           ),
