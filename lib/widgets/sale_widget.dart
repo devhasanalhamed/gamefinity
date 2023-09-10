@@ -43,10 +43,12 @@ class SaleWidgetState extends State<SaleWidget> {
                   padding: EdgeInsets.all(8.0),
                   child: Column(
                     children: [
-                      Text(
-                        'Get the special discount',
-                        style: TextStyle(
-                          color: Colors.white,
+                      FittedBox(
+                        child: Text(
+                          'Get the special discount',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                       SizedBox(
