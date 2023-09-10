@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:gamefinity/models/products_model.dart';
@@ -28,7 +29,7 @@ class ProductWidgetState extends State<ProductWidget> {
             context,
             PageTransition(
               type: PageTransitionType.fade,
-              child:  ProductDetailsScreen(id: productsModelProvider.id!),
+              child: ProductDetailsScreen(id: productsModelProvider.id!),
             ),
           );
         },
@@ -46,7 +47,7 @@ class ProductWidgetState extends State<ProductWidget> {
                 children: [
                   Flexible(
                     child: RichText(
-                      text:  TextSpan(
+                      text: TextSpan(
                         text: '\$',
                         style: const TextStyle(
                           color: Color.fromRGBO(33, 150, 243, 1),
@@ -70,11 +71,15 @@ class ProductWidgetState extends State<ProductWidget> {
             const SizedBox(height: 10.0),
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
-              child: FancyShimmerImage(
+              child: CachedNetworkImage(
                 imageUrl: productsModelProvider.images![0],
                 height: size.height * 0.2,
                 width: double.infinity,
-                boxFit: BoxFit.fill,
+                placeholder: (context, url) => Container(
+                  color: Colors.grey.shade300,
+                ),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
+                fit: BoxFit.fill,
               ),
             ),
             const SizedBox(height: 10.0),
