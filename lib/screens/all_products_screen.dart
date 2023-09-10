@@ -94,10 +94,10 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
                         );
                       },
                     ),
-                    if (!_isLimit)
-                      const CircularProgressIndicator(
-                        color: Colors.amber,
-                      ),
+                    // if (!_isLimit)
+                    //   const CircularProgressIndicator(
+                    //     color: Colors.amber,
+                    //   ),
                   ],
                 ),
               ),
