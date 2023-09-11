@@ -19,11 +19,14 @@ class Home extends StatefulWidget {
 class HomeState extends State<Home> {
   late TextEditingController textEditingController;
   late SwiperController swiperController;
+  late Future<List<ProductsModel>> fetchProducts;
 
   @override
   void initState() {
     textEditingController = TextEditingController();
     swiperController = SwiperController();
+    fetchProducts = APIHandler.getAllProducts(limit: '3');
+
     super.initState();
   }
 
@@ -37,14 +40,7 @@ class HomeState extends State<Home> {
   List<ProductsModel> productsList = [];
   @override
   void didChangeDependencies() {
-    print('didChanged Triggered');
-    getData();
     super.didChangeDependencies();
-  }
-
-  Future<void> getData() async {
-    productsList = await APIHandler.getAllProducts(limit: '3');
-    setState(() {});
   }
 
   @override
@@ -55,7 +51,7 @@ class HomeState extends State<Home> {
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
-          const SizedBox(height: 18.0),
+          SizedBox(height: SizeConfig.safeBlockVertical! * 2),
           TextField(
             controller: textEditingController,
             keyboardType: TextInputType.text,
@@ -77,7 +73,7 @@ class HomeState extends State<Home> {
               suffixIcon: const Icon(Icons.search),
             ),
           ),
-          const SizedBox(height: 18.0),
+          SizedBox(height: SizeConfig.safeBlockVertical! * 2),
           Expanded(
             child: SingleChildScrollView(
               child: Column(
@@ -121,7 +117,7 @@ class HomeState extends State<Home> {
                     ],
                   ),
                   FutureBuilder<List<ProductsModel>>(
-                    future: APIHandler.getAllProducts(limit: '3'),
+                    future: fetchProducts,
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return const Center(
@@ -151,8 +147,9 @@ class HomeState extends State<Home> {
                           ),
                           itemBuilder: (context, index) {
                             return ChangeNotifierProvider.value(
-                                value: snapshot.data![index],
-                                child: const ProductWidget());
+                              value: snapshot.data![index],
+                              child: const ProductWidget(),
+                            );
                           },
                         );
                       }
