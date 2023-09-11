@@ -20,10 +20,12 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
   bool _isLimit = false;
 
   final ScrollController _scrollController = ScrollController();
+  late Future<List<ProductsModel>> fetchProducts;
 
   @override
   void initState() {
-    getData();
+    fetchProducts = APIHandler.getAllProducts(limit: '$limit');
+
     super.initState();
   }
 
@@ -41,15 +43,11 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
             setState(() {});
             return;
           }
-          await getData();
+          productsList = await APIHandler.getAllProducts(limit: '$limit');
+          setState(() {});
         }
       },
     );
-  }
-
-  Future<void> getData() async {
-    productsList = await APIHandler.getAllProducts(limit: '$limit');
-    setState(() {});
   }
 
   @override
