@@ -1,5 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:gamefinity/generated/l10n.dart';
 import 'package:gamefinity/helpers/firebase_api.dart';
 import 'package:gamefinity/screens/no_connection.dart';
 
@@ -12,6 +14,17 @@ void main() async {
   runApp(const MyApp());
 }
 
+List<String> _localization = [
+  'ar',
+  'en',
+];
+
+int languageIndex = 0;
+
+void getLanguage() {
+  languageIndex == 0 ? languageIndex = 1 : languageIndex = 0;
+}
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -19,7 +32,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      locale: Locale(_localization[languageIndex]),
+      localizationsDelegates: const [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: S.delegate.supportedLocales,
+      title: 'Gamefinity',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         scaffoldBackgroundColor: lightScaffoldColor,
@@ -32,7 +53,10 @@ class MyApp extends StatelessWidget {
           backgroundColor: lightScaffoldColor,
           centerTitle: true,
           titleTextStyle: TextStyle(
-              color: lightTextColor, fontSize: 22, fontWeight: FontWeight.bold),
+            color: lightTextColor,
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+          ),
           elevation: 0,
         ),
         iconTheme: IconThemeData(
