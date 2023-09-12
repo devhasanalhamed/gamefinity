@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gamefinity/generated/l10n.dart';
 import 'package:gamefinity/screens/home_screen.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
@@ -35,8 +36,8 @@ class _NoConnectionState extends State<NoConnection> {
   @override
   Widget build(BuildContext context) {
     return isConnected
-        ? const HomeScreen(
-            title: 'Gamefinity',
+        ? HomeScreen(
+            title: S.of(context).title,
           )
         : Center(
             child: SvgPicture.asset(

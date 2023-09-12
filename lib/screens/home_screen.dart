@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gamefinity/helpers/size_config.dart';
+import 'package:gamefinity/main.dart';
 import 'package:gamefinity/screens/category_screen.dart';
 import 'package:gamefinity/screens/developers_screen.dart';
 import 'package:gamefinity/widgets/home.dart';
@@ -45,7 +46,9 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           actions: [
             IconButton.outlined(
-              onPressed: () {},
+              onPressed: () => setState(() {
+                getLanguage();
+              }),
               icon: const Icon(Icons.gamepad_outlined),
             ),
             IconButton.outlined(
