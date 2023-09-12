@@ -1,9 +1,14 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:gamefinity/helpers/firebase_api.dart';
 import 'package:gamefinity/screens/no_connection.dart';
 
 import 'global/theme.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  await FirebaseAPI().initNotifications();
   runApp(const MyApp());
 }
 
