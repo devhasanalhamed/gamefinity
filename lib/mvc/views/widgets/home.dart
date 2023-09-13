@@ -57,7 +57,7 @@ class HomeState extends State<Home> {
             controller: textEditingController,
             keyboardType: TextInputType.text,
             decoration: InputDecoration(
-              hintText: 'Search',
+              hintText: S.of(context).search,
               filled: true,
               fillColor: Theme.of(context).cardColor,
               enabledBorder: OutlineInputBorder(
