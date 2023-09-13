@@ -59,6 +59,16 @@ class S {
       args: [],
     );
   }
+
+  /// `All Games 🔥`
+  String get all_games {
+    return Intl.message(
+      'All Games 🔥',
+      name: 'all_games',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
