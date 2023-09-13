@@ -1,28 +1,21 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:gamefinity/core/services/shared_preferences.dart';
 import 'package:gamefinity/generated/l10n.dart';
-import 'package:gamefinity/helpers/firebase_api.dart';
-import 'package:gamefinity/screens/no_connection.dart';
+import 'package:gamefinity/core/helpers/firebase_api.dart';
+import 'package:gamefinity/mvc/controllers/settings_provider.dart';
+import 'package:gamefinity/mvc/views/screens/no_connection.dart';
+import 'package:provider/provider.dart';
 
-import 'global/theme.dart';
+import 'core/global/theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await FirebaseAPI().initNotifications();
+  await SharedPref.initSharedPref();
   runApp(const MyApp());
-}
-
-List<String> _localization = [
-  'ar',
-  'en',
-];
-
-int languageIndex = 0;
-
-void getLanguage() {
-  languageIndex == 0 ? languageIndex = 1 : languageIndex = 0;
 }
 
 class MyApp extends StatelessWidget {
@@ -31,59 +24,72 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      locale: Locale(_localization[languageIndex]),
-      localizationsDelegates: const [
-        S.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (ctx) => SettingsProvider(),
+        ),
       ],
-      supportedLocales: S.delegate.supportedLocales,
-      title: 'Gamefinity',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        scaffoldBackgroundColor: lightScaffoldColor,
-        primaryColor: lightCardColor,
-        backgroundColor: lightBackgroundColor,
-        appBarTheme: AppBarTheme(
-          iconTheme: IconThemeData(
-            color: lightIconsColor,
+      child: Builder(
+        builder: (context) => MaterialApp(
+          locale: Locale(
+            Provider.of<SettingsProvider>(context).local ??
+                SharedPref.lang ??
+                'en',
           ),
-          backgroundColor: lightScaffoldColor,
-          centerTitle: true,
-          titleTextStyle: TextStyle(
-            color: lightTextColor,
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
-          ),
-          elevation: 0,
-        ),
-        iconTheme: IconThemeData(
-          color: lightIconsColor,
-        ),
-
-        textSelectionTheme: const TextSelectionThemeData(
-          cursorColor: Colors.black,
-          selectionColor: Colors.blue,
-          // selectionHandleColor: Colors.blue,
-        ),
-        // textTheme: TextTheme()
-        // textTheme: Theme.of(context).textTheme.apply(
-        //       bodyColor: Colors.black,
-        //       displayColor: Colors.black,
-        //     ),
-        cardColor: lightCardColor,
-        brightness: Brightness.light,
-        colorScheme: ThemeData().colorScheme.copyWith(
-              secondary: lightIconsColor,
-              brightness: Brightness.light,
+          localizationsDelegates: const [
+            S.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: S.delegate.supportedLocales,
+          title: 'Gamefinity',
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            scaffoldBackgroundColor: lightScaffoldColor,
+            primaryColor: lightCardColor,
+            backgroundColor: lightBackgroundColor,
+            appBarTheme: AppBarTheme(
+              iconTheme: IconThemeData(
+                color: lightIconsColor,
+              ),
+              backgroundColor: lightScaffoldColor,
+              centerTitle: true,
+              titleTextStyle: TextStyle(
+                color: lightTextColor,
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
+              elevation: 0,
             ),
-        bottomNavigationBarTheme: BottomNavigationBarThemeData(
-          selectedItemColor: lightIconsColor,
+            iconTheme: IconThemeData(
+              color: lightIconsColor,
+            ),
+
+            textSelectionTheme: const TextSelectionThemeData(
+              cursorColor: Colors.black,
+              selectionColor: Colors.blue,
+              // selectionHandleColor: Colors.blue,
+            ),
+            // textTheme: TextTheme()
+            // textTheme: Theme.of(context).textTheme.apply(
+            //       bodyColor: Colors.black,
+            //       displayColor: Colors.black,
+            //     ),
+            cardColor: lightCardColor,
+            brightness: Brightness.light,
+            colorScheme: ThemeData().colorScheme.copyWith(
+                  secondary: lightIconsColor,
+                  brightness: Brightness.light,
+                ),
+            bottomNavigationBarTheme: BottomNavigationBarThemeData(
+              selectedItemColor: lightIconsColor,
+            ),
+          ),
+          home: const NoConnection(),
         ),
       ),
-      home: const NoConnection(),
     );
   }
 }
