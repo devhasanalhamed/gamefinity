@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:gamefinity/helpers/size_config.dart';
-import 'package:gamefinity/main.dart';
-import 'package:gamefinity/screens/category_screen.dart';
-import 'package:gamefinity/screens/developers_screen.dart';
-import 'package:gamefinity/widgets/home.dart';
-import 'package:gamefinity/widgets/profile.dart';
+import 'package:gamefinity/core/helpers/size_config.dart';
+import 'package:gamefinity/mvc/controllers/settings_provider.dart';
+import 'package:gamefinity/mvc/views/screens/category_screen.dart';
+import 'package:gamefinity/mvc/views/screens/developers_screen.dart';
+import 'package:gamefinity/mvc/views/widgets/home.dart';
+import 'package:gamefinity/mvc/views/widgets/profile.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key, required this.title});
@@ -46,12 +47,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           actions: [
             IconButton.outlined(
-              onPressed: () => setState(() {
-                getLanguage();
-              }),
-              icon: const Icon(Icons.gamepad_outlined),
-            ),
-            IconButton.outlined(
               onPressed: () {
                 Navigator.push(
                     context,
@@ -61,6 +56,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     ));
               },
               icon: const Icon(Icons.import_contacts),
+            ),
+            IconButton.outlined(
+              onPressed: () {
+                final x =
+                    Provider.of<SettingsProvider>(context, listen: false).local;
+                Provider.of<SettingsProvider>(context, listen: false)
+                    .updateLocal(x == 'ar' ? 'en' : 'ar');
+              },
+              icon: const Icon(Icons.language),
             ),
           ],
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,

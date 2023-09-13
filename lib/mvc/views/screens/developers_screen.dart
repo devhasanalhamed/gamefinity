@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gamefinity/models/users_model.dart';
-import 'package:gamefinity/services/api_handler.dart';
-import 'package:gamefinity/widgets/developer_widget.dart';
+import 'package:gamefinity/mvc/models/users_model.dart';
+import 'package:gamefinity/core/helpers/api_handler.dart';
+import 'package:gamefinity/mvc/views/widgets/developer_widget.dart';
 import 'package:provider/provider.dart';
 
 class DevelopersScreen extends StatefulWidget {

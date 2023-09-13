@@ -1,11 +1,12 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
-import 'package:gamefinity/helpers/size_config.dart';
-import 'package:gamefinity/models/products_model.dart';
-import 'package:gamefinity/screens/all_products_screen.dart';
-import 'package:gamefinity/services/api_handler.dart';
-import 'package:gamefinity/widgets/product_widget.dart';
-import 'package:gamefinity/widgets/sale_widget.dart';
+import 'package:gamefinity/generated/l10n.dart';
+import 'package:gamefinity/core/helpers/size_config.dart';
+import 'package:gamefinity/mvc/models/products_model.dart';
+import 'package:gamefinity/mvc/views/screens/all_products_screen.dart';
+import 'package:gamefinity/core/helpers/api_handler.dart';
+import 'package:gamefinity/mvc/views/widgets/product_widget.dart';
+import 'package:gamefinity/mvc/views/widgets/sale_widget.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
@@ -100,7 +101,7 @@ class HomeState extends State<Home> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text('All Games 🔥'),
+                      Text(S.of(context).all_games),
                       IconButton(
                         onPressed: () {
                           Navigator.of(context).push(

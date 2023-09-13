@@ -1,10 +1,10 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:gamefinity/helpers/size_config.dart';
-import 'package:gamefinity/models/products_model.dart';
-import 'package:gamefinity/services/api_handler.dart';
-import 'package:gamefinity/widgets/product_widget.dart';
+import 'package:gamefinity/core/helpers/size_config.dart';
+import 'package:gamefinity/mvc/models/products_model.dart';
+import 'package:gamefinity/core/helpers/api_handler.dart';
+import 'package:gamefinity/mvc/views/widgets/product_widget.dart';
 import 'package:provider/provider.dart';
 
 class AllProductsScreen extends StatefulWidget {

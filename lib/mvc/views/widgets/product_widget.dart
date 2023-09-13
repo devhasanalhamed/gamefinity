@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
-import 'package:gamefinity/models/products_model.dart';
-import 'package:gamefinity/screens/product_details_screen.dart';
+import 'package:gamefinity/mvc/models/products_model.dart';
+import 'package:gamefinity/mvc/views/screens/product_details_screen.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 

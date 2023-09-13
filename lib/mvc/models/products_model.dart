@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gamefinity/models/categories_model.dart';
+import 'package:gamefinity/mvc/models/categories_model.dart';
 
 class ProductsModel with ChangeNotifier {
   int? id;

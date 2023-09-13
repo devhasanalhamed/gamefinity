@@ -1,9 +1,9 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
-import 'package:gamefinity/global/theme.dart';
-import 'package:gamefinity/models/products_model.dart';
-import 'package:gamefinity/services/api_handler.dart';
+import 'package:gamefinity/core/global/theme.dart';
+import 'package:gamefinity/mvc/models/products_model.dart';
+import 'package:gamefinity/core/helpers/api_handler.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   final int id;

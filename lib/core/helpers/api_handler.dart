@@ -1,7 +1,7 @@
-import 'package:gamefinity/consts/api_consts.dart';
-import 'package:gamefinity/models/categories_model.dart';
-import 'package:gamefinity/models/products_model.dart';
-import 'package:gamefinity/models/users_model.dart';
+import 'package:gamefinity/core/consts/api_consts.dart';
+import 'package:gamefinity/mvc/models/categories_model.dart';
+import 'package:gamefinity/mvc/models/products_model.dart';
+import 'package:gamefinity/mvc/models/users_model.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 

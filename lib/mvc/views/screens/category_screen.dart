@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gamefinity/models/categories_model.dart';
-import 'package:gamefinity/services/api_handler.dart';
-import 'package:gamefinity/widgets/category_widget.dart';
+import 'package:gamefinity/mvc/models/categories_model.dart';
+import 'package:gamefinity/core/helpers/api_handler.dart';
+import 'package:gamefinity/mvc/views/widgets/category_widget.dart';
 import 'package:provider/provider.dart';
 
 class CategoryScreen extends StatefulWidget {
