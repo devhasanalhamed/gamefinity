@@ -47,6 +47,7 @@ class MyApp extends StatelessWidget {
           title: 'Gamefinity',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
+            fontFamily: 'Tajawal',
             scaffoldBackgroundColor: lightScaffoldColor,
             primaryColor: lightCardColor,
             backgroundColor: lightBackgroundColor,
@@ -60,6 +61,7 @@ class MyApp extends StatelessWidget {
                 color: lightTextColor,
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
+                fontFamily: 'Tajawal',
               ),
               elevation: 0,
             ),
