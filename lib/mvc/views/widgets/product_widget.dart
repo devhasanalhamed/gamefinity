@@ -88,7 +88,8 @@ class ProductWidgetState extends State<ProductWidget> {
               child: Text(
                 productsModelProvider.title!,
                 overflow: TextOverflow.ellipsis,
-                maxLines: 2,
+                maxLines: 1,
+                textDirection: TextDirection.ltr,
                 style: const TextStyle(
                   fontSize: 17,
                   fontWeight: FontWeight.w700,
