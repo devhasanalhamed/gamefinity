@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 Future<void> handleBackgroundMessage(RemoteMessage message) async {
+  log('handleBackgroundMessage function has been triggered');
   log('${message.notification?.title}');
   log('${message.notification?.body}');
   log('${message.data}');
@@ -18,6 +19,7 @@ class FirebaseAPI {
   final _firebaseMessaging = FirebaseMessaging.instance;
 
   Future<void> handleMessage(RemoteMessage? message) async {
+    log('handleMessage function has been triggered');
     if (message == null) return;
     log('${message.notification?.title}');
     log('${message.notification?.body}');
@@ -25,6 +27,8 @@ class FirebaseAPI {
   }
 
   void initLocalNotification() async {
+    log('initLocalNotification function has been triggered');
+
     const InitializationSettings initializationSettings =
         InitializationSettings(
       android: AndroidInitializationSettings('launch_background'),
@@ -40,6 +44,8 @@ class FirebaseAPI {
   }
 
   Future<void> setupFlutterNotifications() async {
+    log('setupFlutterNotifications function has been triggered');
+
     if (isFlutterLocalNotificationsInitialized) {
       return;
     }
@@ -53,10 +59,6 @@ class FirebaseAPI {
 
     flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
-    /// Create an Android Notification Channel.
-    ///
-    /// We use this channel in the `AndroidManifest.xml` file to override the
-    /// default FCM channel to enable heads up notifications.
     await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>()
@@ -83,6 +85,8 @@ class FirebaseAPI {
   }
 
   void showFlutterNotification(RemoteMessage message) {
+    log('showFlutterNotification function has been triggered');
+
     RemoteNotification? notification = message.notification;
     AndroidNotification? android = message.notification?.android;
     if (notification != null && android != null && !kIsWeb) {
@@ -106,6 +110,7 @@ class FirebaseAPI {
   }
 
   initNotifications() async {
+    log('initNotifications function has been triggered');
     await _firebaseMessaging.requestPermission();
     final fCMToken = await _firebaseMessaging.getToken();
     log('token: $fCMToken');
