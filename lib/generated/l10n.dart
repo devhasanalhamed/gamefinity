@@ -79,6 +79,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Categories`
+  String get categories {
+    return Intl.message(
+      'Categories',
+      name: 'categories',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Categories`
+  String get developers {
+    return Intl.message(
+      'Categories',
+      name: 'developers',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
