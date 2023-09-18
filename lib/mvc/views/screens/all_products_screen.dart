@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:gamefinity/core/helpers/size_config.dart';
+import 'package:gamefinity/generated/l10n.dart';
 import 'package:gamefinity/mvc/models/products_model.dart';
 import 'package:gamefinity/core/helpers/api_handler.dart';
 import 'package:gamefinity/mvc/views/widgets/product_widget.dart';
@@ -61,7 +62,7 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
     SizeConfig().init(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('All products'),
+        title: Text(S.of(context).all_games),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
