@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gamefinity/generated/l10n.dart';
 import 'package:gamefinity/mvc/models/categories_model.dart';
 import 'package:gamefinity/core/helpers/api_handler.dart';
 import 'package:gamefinity/mvc/views/widgets/category_widget.dart';
@@ -16,7 +17,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Categoires'),
+        title: Text(S.of(context).categories),
       ),
       body: FutureBuilder<List<CategoriesModel>>(
           future: APIHandler.getCategories(),
