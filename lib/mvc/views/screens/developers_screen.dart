@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gamefinity/generated/l10n.dart';
 import 'package:gamefinity/mvc/models/users_model.dart';
 import 'package:gamefinity/core/helpers/api_handler.dart';
 import 'package:gamefinity/mvc/views/widgets/developer_widget.dart';
@@ -16,7 +17,7 @@ class DevelopersScreenState extends State<DevelopersScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Developers'),
+        title: Text(S.of(context).developers),
       ),
       body: FutureBuilder<List<UsersModel>>(
         future: APIHandler.getUsers(),
