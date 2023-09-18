@@ -2,6 +2,7 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:gamefinity/generated/l10n.dart';
 import 'package:gamefinity/core/helpers/size_config.dart';
+import 'package:gamefinity/mvc/controllers/settings_provider.dart';
 import 'package:gamefinity/mvc/models/products_model.dart';
 import 'package:gamefinity/mvc/views/screens/all_products_screen.dart';
 import 'package:gamefinity/core/helpers/api_handler.dart';
@@ -98,24 +99,39 @@ class HomeState extends State<Home> {
                       ),
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(S.of(context).all_games),
-                      IconButton(
-                        onPressed: () {
-                          Navigator.of(context).push(
-                            PageTransition(
-                              child: const AllProductsScreen(),
-                              type: PageTransitionType.fade,
-                            ),
-                          );
-                        },
-                        icon: const Icon(
-                          Icons.arrow_circle_right_outlined,
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        PageTransition(
+                          child: const AllProductsScreen(),
+                          type: PageTransitionType.fade,
                         ),
+                      );
+                    },
+                    child: SizedBox(
+                      height: SizeConfig.safeBlockVertical! * 6,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            S.of(context).all_games,
+                            style: const TextStyle(
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Icon(
+                            Provider.of<SettingsProvider>(context,
+                                            listen: false)
+                                        .local !=
+                                    'en'
+                                ? Icons.arrow_circle_left_outlined
+                                : Icons.arrow_circle_right_outlined,
+                            size: 24.0,
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
                   FutureBuilder<List<ProductsModel>>(
                     future: fetchProducts,
