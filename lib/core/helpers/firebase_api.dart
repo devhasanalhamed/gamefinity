@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:ui';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 Future<void> handleBackgroundMessage(RemoteMessage message) async {
@@ -31,7 +33,7 @@ class FirebaseAPI {
 
     const InitializationSettings initializationSettings =
         InitializationSettings(
-      android: AndroidInitializationSettings('launch_background'),
+      android: AndroidInitializationSettings('@drawable/ic_stat_ff'),
     );
 
     await flutterLocalNotificationsPlugin.initialize(
@@ -102,7 +104,9 @@ class FirebaseAPI {
             channelDescription: channel.description,
             // TODO add a proper drawable resource to android, for now using
             //      one that already exists in example app.
-            icon: 'launch_background',
+            icon: '@drawable/ic_stat_ff',
+            // Specify the color
+            // color: Colors.amber,
           ),
         ),
       );
