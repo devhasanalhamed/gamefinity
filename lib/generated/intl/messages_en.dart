@@ -24,7 +24,16 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "all_games": MessageLookupByLibrary.simpleMessage("All Games 🔥"),
         "categories": MessageLookupByLibrary.simpleMessage("Categories"),
-        "developers": MessageLookupByLibrary.simpleMessage("Categories"),
+        "developers": MessageLookupByLibrary.simpleMessage("Developers"),
+        "errorWhileFetching": MessageLookupByLibrary.simpleMessage(
+            "Error occurred while fetching data"),
+        "getBestOffers":
+            MessageLookupByLibrary.simpleMessage("أحصل على أفضل العروض"),
+        "home": MessageLookupByLibrary.simpleMessage("Home"),
+        "itIsEmpty":
+            MessageLookupByLibrary.simpleMessage("There is no data yet!"),
+        "off": MessageLookupByLibrary.simpleMessage("OFF"),
+        "profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "search": MessageLookupByLibrary.simpleMessage("search"),
         "title": MessageLookupByLibrary.simpleMessage("Gamefinity")
       };

@@ -3,5 +3,11 @@
     "all_games" : "All Games 🔥",
     "search" : "search",
     "categories": "Categories",
-    "developers": "Categories"
+    "developers": "Developers",
+    "home": "Home",
+    "profile": "Profile",
+    "errorWhileFetching": "Error occurred while fetching data",
+    "itIsEmpty": "There is no data yet!",
+    "off":"OFF",
+    "getBestOffers": "أحصل على أفضل العروض"
 }

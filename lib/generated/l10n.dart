@@ -90,11 +90,71 @@ class S {
     );
   }
 
-  /// `Categories`
+  /// `Developers`
   String get developers {
     return Intl.message(
-      'Categories',
+      'Developers',
       name: 'developers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Home`
+  String get home {
+    return Intl.message(
+      'Home',
+      name: 'home',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Profile`
+  String get profile {
+    return Intl.message(
+      'Profile',
+      name: 'profile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error occurred while fetching data`
+  String get errorWhileFetching {
+    return Intl.message(
+      'Error occurred while fetching data',
+      name: 'errorWhileFetching',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `There is no data yet!`
+  String get itIsEmpty {
+    return Intl.message(
+      'There is no data yet!',
+      name: 'itIsEmpty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `OFF`
+  String get off {
+    return Intl.message(
+      'OFF',
+      name: 'off',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `أحصل على أفضل العروض`
+  String get getBestOffers {
+    return Intl.message(
+      'أحصل على أفضل العروض',
+      name: 'getBestOffers',
       desc: '',
       args: [],
     );

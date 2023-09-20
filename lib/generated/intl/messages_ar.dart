@@ -25,6 +25,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "all_games": MessageLookupByLibrary.simpleMessage("كل الألعاب  🔥"),
         "categories": MessageLookupByLibrary.simpleMessage("التصنيفات"),
         "developers": MessageLookupByLibrary.simpleMessage("المطورون"),
+        "errorWhileFetching":
+            MessageLookupByLibrary.simpleMessage("حدث خطأ أثناء جلب البيانات"),
+        "getBestOffers":
+            MessageLookupByLibrary.simpleMessage("أحصل على أفضل العروض"),
+        "home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
+        "itIsEmpty":
+            MessageLookupByLibrary.simpleMessage("لا توجد بيانات بعد!"),
+        "off": MessageLookupByLibrary.simpleMessage("خصم"),
+        "profile": MessageLookupByLibrary.simpleMessage("ملفي"),
         "search": MessageLookupByLibrary.simpleMessage("البحث"),
         "title": MessageLookupByLibrary.simpleMessage("جيمفينيتي")
       };
