@@ -1,5 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:gamefinity/generated/l10n.dart';
 
 class SaleWidget extends StatefulWidget {
   const SaleWidget({Key? key}) : super(key: key);
@@ -40,19 +40,19 @@ class SaleWidgetState extends State<SaleWidget> {
                   color: const Color(0xFF9689CE),
                   borderRadius: BorderRadius.circular(18.0),
                 ),
-                child: const Padding(
+                child: Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Column(
                     children: [
-                      FittedBox(
+                       FittedBox(
                         child: Text(
-                          'Get the special discount',
+                          S.of(context).getBestOffers,
                           style: TextStyle(
                             color: Colors.white,
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 18.0,
                       ),
                       Flexible(
@@ -61,8 +61,8 @@ class SaleWidgetState extends State<SaleWidget> {
                           child: FittedBox(
                             fit: BoxFit.fill,
                             child: Text(
-                              '50% OFF',
-                              style: TextStyle(
+                              S.of(context).off,
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 100.0,
@@ -81,11 +81,10 @@ class SaleWidgetState extends State<SaleWidget> {
             flex: 3,
             child: Padding(
               padding: const EdgeInsets.all(14.0),
-              child: CachedNetworkImage(
-                imageUrl: 'https://picsum.photos/200',
+              child: Image.network(
+                'https://picsum.photos/200',
                 width: double.infinity,
                 fit: BoxFit.contain,
-                errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
             ),
           ),
