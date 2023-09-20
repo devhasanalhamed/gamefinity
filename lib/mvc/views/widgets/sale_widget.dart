@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class SaleWidget extends StatefulWidget {
@@ -80,10 +81,11 @@ class SaleWidgetState extends State<SaleWidget> {
             flex: 3,
             child: Padding(
               padding: const EdgeInsets.all(14.0),
-              child: Image.network(
-                'https://picsum.photos/200',
+              child: CachedNetworkImage(
+                imageUrl: 'https://picsum.photos/200',
                 width: double.infinity,
                 fit: BoxFit.contain,
+                errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
             ),
           ),
