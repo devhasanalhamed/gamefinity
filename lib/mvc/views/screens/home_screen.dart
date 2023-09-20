@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:gamefinity/core/global/theme.dart';
 import 'package:gamefinity/core/helpers/size_config.dart';
+import 'package:gamefinity/generated/l10n.dart';
 import 'package:gamefinity/mvc/controllers/settings_provider.dart';
 import 'package:gamefinity/mvc/views/screens/category_screen.dart';
 import 'package:gamefinity/mvc/views/screens/developers_screen.dart';
-import 'package:gamefinity/mvc/views/widgets/home.dart';
+import 'package:gamefinity/mvc/views/widgets/homepage.dart';
 import 'package:gamefinity/mvc/views/widgets/profile.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
@@ -21,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int currentIndex = 0;
 
   final currentPage = <Widget>[
-    const Home(),
+    const Homepage(),
     const Profile(),
   ];
 
@@ -72,18 +74,19 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         body: currentPage[currentIndex],
         bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: Colors.white,
           currentIndex: currentIndex,
           onTap: (value) => setState(() {
             currentIndex = value;
           }),
-          items: const [
+          items: [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
+              icon: const Icon(Icons.home),
+              label: S.of(context).home,
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'Profile',
+              icon: const Icon(Icons.person),
+              label: S.of(context).profile,
             ),
           ],
         ),

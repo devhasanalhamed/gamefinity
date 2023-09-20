@@ -29,12 +29,12 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 ),
               );
             } else if (snapshot.hasError) {
-              return const Center(
-                child: Text('An Error Occure'),
+              return Center(
+                child: Text(S.of(context).errorWhileFetching),
               );
             } else if (snapshot.data == null) {
-              return const Center(
-                child: Text('There are no proudcts yet'),
+              return Center(
+                child: Text(S.of(context).itIsEmpty),
               );
             } else {
               return GridView.builder(
