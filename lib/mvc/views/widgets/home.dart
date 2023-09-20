@@ -100,6 +100,7 @@ class HomeState extends State<Home> {
                     ),
                   ),
                   InkWell(
+                    borderRadius: BorderRadius.circular(10.0),
                     onTap: () {
                       Navigator.of(context).push(
                         PageTransition(
@@ -108,8 +109,10 @@ class HomeState extends State<Home> {
                         ),
                       );
                     },
-                    child: SizedBox(
-                      height: SizeConfig.safeBlockVertical! * 6,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        vertical: SizeConfig.safeBlockVertical! * 1,
+                      ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -127,7 +130,7 @@ class HomeState extends State<Home> {
                                     'en'
                                 ? Icons.arrow_circle_left_outlined
                                 : Icons.arrow_circle_right_outlined,
-                            size: 24.0,
+                            size: 32.0,
                           ),
                         ],
                       ),
