@@ -12,8 +12,8 @@ import 'core/global/theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  await FirebaseAPI().initNotifications();
+  // await Firebase.initializeApp();
+  // await FirebaseAPI().initNotifications();
   await SharedPref.initSharedPref();
   runApp(const MyApp());
 }
@@ -47,6 +47,7 @@ class MyApp extends StatelessWidget {
           title: 'Gamefinity',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
+            useMaterial3: true,
             fontFamily: 'Tajawal',
             scaffoldBackgroundColor: lightScaffoldColor,
             primaryColor: lightCardColor,
