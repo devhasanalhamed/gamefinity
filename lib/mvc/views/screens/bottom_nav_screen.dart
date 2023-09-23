@@ -39,7 +39,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
       ),
       BottomNavigationBarItem(
         icon: const Icon(LucideIcons.search),
-        label: S.of(context).profile,
+        label: S.of(context).explore,
       ),
       BottomNavigationBarItem(
         icon: const Icon(LucideIcons.user2),
@@ -56,6 +56,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
           child: _pages.elementAt(currentIndex),
         ),
         bottomNavigationBar: BottomNavigationBar(
+          showUnselectedLabels: false,
           backgroundColor: Colors.white,
           currentIndex: currentIndex,
           onTap: (value) => setState(() {
