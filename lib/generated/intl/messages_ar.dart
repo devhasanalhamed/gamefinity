@@ -24,17 +24,27 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "all_games": MessageLookupByLibrary.simpleMessage("كل الألعاب  🔥"),
         "categories": MessageLookupByLibrary.simpleMessage("التصنيفات"),
+        "confirmPassword":
+            MessageLookupByLibrary.simpleMessage("تأكيد كلمة المرور"),
+        "createAccount": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
         "developers": MessageLookupByLibrary.simpleMessage("المطورون"),
+        "email": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
         "errorWhileFetching":
             MessageLookupByLibrary.simpleMessage("حدث خطأ أثناء جلب البيانات"),
+        "explore": MessageLookupByLibrary.simpleMessage("أكتشف"),
         "getBestOffers":
             MessageLookupByLibrary.simpleMessage("أحصل على أفضل العروض"),
+        "haveNoAccount":
+            MessageLookupByLibrary.simpleMessage("لم تسجل حسابك بعد!"),
         "home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
         "itIsEmpty":
             MessageLookupByLibrary.simpleMessage("لا توجد بيانات بعد!"),
         "off": MessageLookupByLibrary.simpleMessage("خصم"),
+        "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
         "profile": MessageLookupByLibrary.simpleMessage("ملفي"),
         "search": MessageLookupByLibrary.simpleMessage("البحث"),
+        "signIn": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
+        "signUp": MessageLookupByLibrary.simpleMessage("تسجيل حساب"),
         "title": MessageLookupByLibrary.simpleMessage("جيمفينيتي")
       };
 }

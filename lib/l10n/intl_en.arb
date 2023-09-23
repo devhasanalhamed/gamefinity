@@ -5,9 +5,18 @@
     "categories": "Categories",
     "developers": "Developers",
     "home": "Home",
+    "explore": "Explore",
     "profile": "Profile",
     "errorWhileFetching": "Error occurred while fetching data",
     "itIsEmpty": "There is no data yet!",
     "off":"OFF",
-    "getBestOffers": "أحصل على أفضل العروض"
+    "getBestOffers": "get the best offers",
+    "signUp": "Sign Up",
+    "signIn": "Sign In",
+    "createAccount": "Create account",
+    "haveNoAccount": "You don't have an account!",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm password"
+
 }

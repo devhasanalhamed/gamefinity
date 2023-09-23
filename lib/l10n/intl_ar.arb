@@ -5,9 +5,17 @@
     "categories": "التصنيفات",
     "developers": "المطورون",
     "home": "الرئيسية",
+    "explore": "أكتشف",
     "profile": "ملفي",
     "errorWhileFetching": "حدث خطأ أثناء جلب البيانات",
     "itIsEmpty": "لا توجد بيانات بعد!",
     "off":"خصم",
-    "getBestOffers": "أحصل على أفضل العروض"
+    "getBestOffers": "أحصل على أفضل العروض",
+    "signUp": "تسجيل حساب",
+    "signIn": "تسجيل الدخول",
+    "createAccount": "إنشاء حساب",
+    "haveNoAccount": "لم تسجل حسابك بعد!",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "confirmPassword": "تأكيد كلمة المرور"
 }
