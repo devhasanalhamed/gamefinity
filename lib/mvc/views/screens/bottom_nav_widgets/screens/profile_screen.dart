@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gamefinity/core/helpers/size_config.dart';
 import 'package:gamefinity/mvc/views/widgets/profile_pageview.dart';
@@ -25,8 +26,17 @@ class ProfileState extends State<Profile> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CircleAvatar(
-                  radius: SizeConfig.safeBlockHorizontal! * 12,
+                Row(
+                  children: [
+                    CircleAvatar(
+                      radius: SizeConfig.safeBlockHorizontal! * 12,
+                    ),
+                    ElevatedButton.icon(
+                      onPressed: FirebaseAuth.instance.signOut,
+                      icon: const Icon(Icons.logout),
+                      label: const Text('signOut'),
+                    )
+                  ],
                 ),
                 SizedBox(height: SizeConfig.safeBlockVertical! * 1),
                 const Expanded(
