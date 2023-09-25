@@ -34,8 +34,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "explore": MessageLookupByLibrary.simpleMessage("Explore"),
         "getBestOffers":
             MessageLookupByLibrary.simpleMessage("get the best offers"),
-        "haveNoAccount":
-            MessageLookupByLibrary.simpleMessage("You don\'t have an account!"),
+        "haveNoAccount": MessageLookupByLibrary.simpleMessage(
+            "You don\'t have an account! "),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
         "itIsEmpty":
             MessageLookupByLibrary.simpleMessage("There is no data yet!"),

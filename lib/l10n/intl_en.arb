@@ -14,7 +14,7 @@
     "signUp": "Sign Up",
     "signIn": "Sign In",
     "createAccount": "Create account",
-    "haveNoAccount": "You don't have an account!",
+    "haveNoAccount": "You don't have an account! ",
     "email": "Email",
     "password": "Password",
     "confirmPassword": "Confirm password"

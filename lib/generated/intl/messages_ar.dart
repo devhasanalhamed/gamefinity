@@ -35,7 +35,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "getBestOffers":
             MessageLookupByLibrary.simpleMessage("أحصل على أفضل العروض"),
         "haveNoAccount":
-            MessageLookupByLibrary.simpleMessage("لم تسجل حسابك بعد!"),
+            MessageLookupByLibrary.simpleMessage("لم تسجل حسابك بعد! "),
         "home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
         "itIsEmpty":
             MessageLookupByLibrary.simpleMessage("لا توجد بيانات بعد!"),
