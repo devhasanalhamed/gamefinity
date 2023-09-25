@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gamefinity/mvc/views/screens/auth_screen.dart';
+import 'package:gamefinity/mvc/views/screens/bottom_nav_screen.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class NoConnection extends StatefulWidget {
@@ -35,7 +37,16 @@ class _NoConnectionState extends State<NoConnection> {
   @override
   Widget build(BuildContext context) {
     return isConnected
-        ? const AuthScreen()
+        ? StreamBuilder(
+            stream: FirebaseAuth.instance.authStateChanges(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return const BottomNavScreen();
+              } else {
+                return const AuthScreen();
+              }
+            },
+          )
         : Center(
             child: SvgPicture.asset(
               'assets/images/no_connection.svg',
