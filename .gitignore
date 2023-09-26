@@ -45,3 +45,4 @@ app.*.map.json
 pubspec.lock
 *.lock
 pubspec.lock
+pubspec.lock
