@@ -18,7 +18,7 @@ class AuthScreen extends StatefulWidget {
 }
 
 class AuthScreenState extends State<AuthScreen> {
-  GlobalKey<FormState> _formKey = GlobalKey();
+  late GlobalKey<FormState> formKey;
   bool isLogin = true;
 
   void toggleState() {
@@ -28,11 +28,18 @@ class AuthScreenState extends State<AuthScreen> {
   }
 
   @override
+  void initState() {
+    formKey = GlobalKey();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final provider = Provider.of<AuthProvider>(context, listen: false);
+    // final screenSize = MediaQuery.of(context).size;
     final formData = {};
     void onSubmitForm() {
-      _formKey.currentState!.save();
+      formKey.currentState!.save();
       log("${formData['username']}, ${formData['password']}");
       if (isLogin) {
         provider.signInWithFirebaseUsingEmail(
@@ -48,6 +55,7 @@ class AuthScreenState extends State<AuthScreen> {
     }
 
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
         title: Text(S.of(context).title),
         backgroundColor: Colors.transparent,
@@ -65,31 +73,37 @@ class AuthScreenState extends State<AuthScreen> {
       ),
       body: Stack(
         children: [
-          CircularParticle(
-            key: UniqueKey(),
-            awayRadius: 80,
-            numberOfParticles: 200,
-            speedOfParticles: -1,
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            onTapAnimation: false,
-            particleColor: Colors.grey,
-            awayAnimationDuration: const Duration(milliseconds: 600),
-            maxParticleSize: 2,
-            isRandSize: true,
-            isRandomColor: true,
-            randColorList: [
-              Colors.red.withAlpha(210),
-              Colors.orange.withAlpha(210),
-            ],
-            awayAnimationCurve: Curves.easeInOutBack,
-            enableHover: true,
-            hoverColor: Colors.white,
-            hoverRadius: 90,
-            connectDots: false, //not recommended
+          LayoutBuilder(
+            builder: (context, constraints) => CircularParticle(
+              key: UniqueKey(),
+              awayRadius: 80,
+              numberOfParticles: 200,
+              speedOfParticles: -1,
+              height: constraints.maxHeight,
+              width: constraints.maxWidth,
+              onTapAnimation: false,
+              particleColor: Colors.grey,
+              awayAnimationDuration: const Duration(milliseconds: 600),
+              maxParticleSize: 2,
+              isRandSize: true,
+              isRandomColor: true,
+              randColorList: [
+                Colors.red.withAlpha(210),
+                Colors.orange.withAlpha(210),
+              ],
+              awayAnimationCurve: Curves.easeInOutBack,
+              enableHover: true,
+              hoverColor: Colors.white,
+              hoverRadius: 90,
+              connectDots: false, //not recommended
+            ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            padding: const EdgeInsets.only(
+              left: 16.0,
+              right: 16.0,
+              top: kToolbarHeight,
+            ),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -104,11 +118,12 @@ class AuthScreenState extends State<AuthScreen> {
                     ),
                   ),
                   Form(
-                    key: _formKey,
+                    key: formKey,
                     child: AnimatedContainer(
                       duration: const Duration(milliseconds: 300),
                       height: isLogin ? 160 : 240,
                       child: ListView(
+                        padding: EdgeInsets.zero,
                         physics: const NeverScrollableScrollPhysics(),
                         children: [
                           TextFormField(
@@ -202,38 +217,33 @@ class AuthScreenState extends State<AuthScreen> {
                       ),
                     ),
                   ),
-                  if (isLogin)
-                    RichText(
-                      text: TextSpan(
-                        text: S.of(context).haveNoAccount,
-                        style: const TextStyle(
-                          color: Colors.black,
-                        ),
-                        children: [
-                          TextSpan(
-                              text: S.of(context).createAccount,
-                              style: const TextStyle(
-                                color: Colors.red,
-                              ),
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = toggleState),
-                        ],
+                  RichText(
+                    text: TextSpan(
+                      text: isLogin
+                          ? S.of(context).haveNoAccount
+                          : S.of(context).haveAnAccount,
+                      style: const TextStyle(
+                        color: Colors.black,
                       ),
+                      children: [
+                        TextSpan(
+                            text: isLogin
+                                ? S.of(context).createAccount
+                                : S.of(context).signIn,
+                            style: const TextStyle(
+                              color: Colors.red,
+                            ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = toggleState),
+                      ],
                     ),
+                  ),
                   ElevatedButton(
                     onPressed: onSubmitForm,
                     child: Text(
                       isLogin ? S.of(context).signIn : S.of(context).signUp,
                     ),
                   ),
-                  if (!isLogin)
-                    TextButton(
-                      onPressed: toggleState,
-                      child: Text(
-                        S.of(context).signIn,
-                        style: const TextStyle(color: Colors.red),
-                      ),
-                    ),
                 ],
               ),
             ),
