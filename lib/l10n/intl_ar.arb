@@ -15,7 +15,9 @@
     "signIn": "تسجيل الدخول",
     "createAccount": "إنشاء حساب",
     "haveNoAccount": "لم تسجل حسابك بعد! ",
+    "haveAnAccount": "لديك حساب من قبل ",
     "email": "البريد الإلكتروني",
     "password": "كلمة المرور",
-    "confirmPassword": "تأكيد كلمة المرور"
+    "confirmPassword": "تأكيد كلمة المرور",
+    "signOut": "تسجيل الخروج"
 }

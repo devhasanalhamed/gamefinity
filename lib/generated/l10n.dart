@@ -210,6 +210,16 @@ class S {
     );
   }
 
+  /// `Already have an account `
+  String get haveAnAccount {
+    return Intl.message(
+      'Already have an account ',
+      name: 'haveAnAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Email`
   String get email {
     return Intl.message(
@@ -235,6 +245,16 @@ class S {
     return Intl.message(
       'Confirm password',
       name: 'confirmPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Logout`
+  String get signOut {
+    return Intl.message(
+      'Logout',
+      name: 'signOut',
       desc: '',
       args: [],
     );

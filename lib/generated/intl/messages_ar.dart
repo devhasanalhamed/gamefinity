@@ -34,6 +34,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "explore": MessageLookupByLibrary.simpleMessage("أكتشف"),
         "getBestOffers":
             MessageLookupByLibrary.simpleMessage("أحصل على أفضل العروض"),
+        "haveAnAccount":
+            MessageLookupByLibrary.simpleMessage("لديك حساب من قبل "),
         "haveNoAccount":
             MessageLookupByLibrary.simpleMessage("لم تسجل حسابك بعد! "),
         "home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
@@ -44,6 +46,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "profile": MessageLookupByLibrary.simpleMessage("ملفي"),
         "search": MessageLookupByLibrary.simpleMessage("البحث"),
         "signIn": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
+        "signOut": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
         "signUp": MessageLookupByLibrary.simpleMessage("تسجيل حساب"),
         "title": MessageLookupByLibrary.simpleMessage("جيمفينيتي")
       };

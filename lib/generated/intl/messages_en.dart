@@ -34,6 +34,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "explore": MessageLookupByLibrary.simpleMessage("Explore"),
         "getBestOffers":
             MessageLookupByLibrary.simpleMessage("get the best offers"),
+        "haveAnAccount":
+            MessageLookupByLibrary.simpleMessage("Already have an account "),
         "haveNoAccount": MessageLookupByLibrary.simpleMessage(
             "You don\'t have an account! "),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
@@ -44,6 +46,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "search": MessageLookupByLibrary.simpleMessage("search"),
         "signIn": MessageLookupByLibrary.simpleMessage("Sign In"),
+        "signOut": MessageLookupByLibrary.simpleMessage("Logout"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
         "title": MessageLookupByLibrary.simpleMessage("Gamefinity")
       };
