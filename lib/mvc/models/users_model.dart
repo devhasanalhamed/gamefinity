@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class UsersModel with ChangeNotifier {
-  int? id;
+  String? id;
   String? email;
   String? password;
   String? name;
