@@ -42,12 +42,12 @@ class AuthScreenState extends State<AuthScreen> {
       formKey.currentState!.save();
       log("${formData['username']}, ${formData['password']}");
       if (isLogin) {
-        provider.signInWithFirebaseUsingEmail(
+        provider.signInUserWithEmail(
           formData['username'],
           formData['password'],
         );
       } else {
-        provider.signUpWithFirebaseUsingEmail(
+        provider.createUserWithEmail(
           formData['username'],
           formData['password'],
         );
@@ -239,7 +239,9 @@ class AuthScreenState extends State<AuthScreen> {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: onSubmitForm,
+                    onPressed: () =>
+                        Provider.of<AuthProvider>(context, listen: false)
+                            .customDialog(context, 'description'),
                     child: Text(
                       isLogin ? S.of(context).signIn : S.of(context).signUp,
                     ),
