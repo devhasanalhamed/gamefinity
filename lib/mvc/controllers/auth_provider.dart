@@ -1,13 +1,50 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:gamefinity/mvc/models/users_model.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthProvider with ChangeNotifier {
   FirebaseAuth auth = FirebaseAuth.instance;
 
-  Future<void> signUpWithFirebaseUsingEmail(
-      String emailAddress, String password) async {
+  Stream<UsersModel?> get user {
+    return auth.authStateChanges().map((User? user) => (user != null)
+        ? UsersModel(
+            id: user.uid,
+            email: user.email,
+            password: user.phoneNumber,
+            name: user.displayName,
+            role: user.tenantId,
+            avatar: user.tenantId,
+            creationAt: null,
+            updatedAt: null)
+        : null);
+  }
+
+  Future<void> signInUserWithGoogle() async {
+    GoogleSignIn googleSignIn = GoogleSignIn(
+      scopes: [
+        'email',
+        'https://www.googleapis.com/auth/contacts.readonly',
+      ],
+    );
+
+    try {
+      GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+      GoogleSignInAuthentication googleAuth = await googleUser!.authentication;
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        idToken: googleAuth.idToken,
+        accessToken: googleAuth.accessToken,
+      );
+      await auth.signInWithCredential(credential);
+    } catch (e) {
+      log('error sign in using google: $e');
+    }
+  }
+
+  Future<void> createUserWithEmail(String emailAddress, String password) async {
     try {
       UserCredential userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
@@ -25,8 +62,7 @@ class AuthProvider with ChangeNotifier {
     }
   }
 
-  Future<void> signInWithFirebaseUsingEmail(
-      String emailAddress, String password) async {
+  Future<void> signInUserWithEmail(String emailAddress, String password) async {
     try {
       final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailAddress,
@@ -42,7 +78,59 @@ class AuthProvider with ChangeNotifier {
     }
   }
 
-  Future<void> signOutWithFirebase() async {
-    await FirebaseAuth.instance.signOut();
+  Future<void> signOutUser() async {
+    try {
+      auth.signOut();
+    } catch (e) {
+      log('error login out: $e');
+    }
+  }
+
+  void customDialog(BuildContext context, String description) {
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) => Dialog(
+        alignment: Alignment.center,
+        backgroundColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Container(
+          height: 200,
+          width: 200,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            gradient: const LinearGradient(
+              colors: [
+                Colors.indigo,
+                Colors.deepOrange,
+              ],
+              begin: Alignment.bottomRight,
+              end: Alignment.topLeft,
+              stops: [
+                0,
+                0.9,
+              ],
+            ),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              const CircularProgressIndicator(
+                color: Colors.orange,
+              ),
+              Text(
+                description,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
