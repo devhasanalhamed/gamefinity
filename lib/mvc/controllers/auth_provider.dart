@@ -87,6 +87,9 @@ class AuthProvider with ChangeNotifier {
   }
 
   void customDialog(BuildContext context, String description) {
+    Timer(Duration(milliseconds: 300), () {
+      Navigator.of(context).pop();
+    });
     showDialog(
       barrierDismissible: false,
       context: context,
