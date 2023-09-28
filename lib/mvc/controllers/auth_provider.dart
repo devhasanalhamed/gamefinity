@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gamefinity/mvc/models/users_model.dart';
+import 'package:gamefinity/mvc/utils/custom_dialog.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthProvider with ChangeNotifier {
@@ -62,7 +63,9 @@ class AuthProvider with ChangeNotifier {
     }
   }
 
-  Future<void> signInUserWithEmail(String emailAddress, String password) async {
+  Future<void> signInUserWithEmail(
+      String emailAddress, String password, BuildContext context) async {
+    CustomDialog().showCustomDialog(context, 'جاري تسجيل الدخول');
     try {
       final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailAddress,
@@ -70,11 +73,15 @@ class AuthProvider with ChangeNotifier {
       );
       log('$credential');
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
+      log(e.code);
+      if (e.code == 'INVALID_LOGIN_CREDENTIALS') {
         log('No user found for that email.');
       } else if (e.code == 'wrong-password') {
         log('Wrong password provided for that user.');
       }
+    }
+    if (context.mounted) {
+      CustomDialog().popCurrentDialog(context);
     }
   }
 
@@ -84,56 +91,5 @@ class AuthProvider with ChangeNotifier {
     } catch (e) {
       log('error login out: $e');
     }
-  }
-
-  void customDialog(BuildContext context, String description) {
-    Timer(Duration(milliseconds: 300), () {
-      Navigator.of(context).pop();
-    });
-    showDialog(
-      barrierDismissible: false,
-      context: context,
-      builder: (context) => Dialog(
-        alignment: Alignment.center,
-        backgroundColor: Colors.white,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Container(
-          height: 200,
-          width: 200,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            gradient: const LinearGradient(
-              colors: [
-                Colors.indigo,
-                Colors.deepOrange,
-              ],
-              begin: Alignment.bottomRight,
-              end: Alignment.topLeft,
-              stops: [
-                0,
-                0.9,
-              ],
-            ),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              const CircularProgressIndicator(
-                color: Colors.orange,
-              ),
-              Text(
-                description,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
   }
 }

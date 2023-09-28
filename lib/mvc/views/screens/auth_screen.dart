@@ -45,6 +45,7 @@ class AuthScreenState extends State<AuthScreen> {
         provider.signInUserWithEmail(
           formData['username'],
           formData['password'],
+          context,
         );
       } else {
         provider.createUserWithEmail(
@@ -239,9 +240,7 @@ class AuthScreenState extends State<AuthScreen> {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () =>
-                        Provider.of<AuthProvider>(context, listen: false)
-                            .customDialog(context, 'description'),
+                    onPressed: onSubmitForm,
                     child: Text(
                       isLogin ? S.of(context).signIn : S.of(context).signUp,
                     ),
