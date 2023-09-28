@@ -18,7 +18,7 @@ class AllProductsScreen extends StatefulWidget {
 class _AllProductsScreenState extends State<AllProductsScreen> {
   List<ProductsModel> productsList = [];
   int limit = 10;
-  bool _isLimit = false;
+  // bool _isLimit = false;
 
   final ScrollController _scrollController = ScrollController();
   late Future<List<ProductsModel>> fetchProducts;
@@ -40,7 +40,7 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
           limit += 10;
           log('$limit');
           if (limit == 200) {
-            _isLimit = true;
+            // _isLimit = true;
             setState(() {});
             return;
           }
