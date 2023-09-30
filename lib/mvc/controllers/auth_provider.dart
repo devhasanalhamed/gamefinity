@@ -1,14 +1,29 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gamefinity/mvc/models/users_model.dart';
-import 'package:gamefinity/mvc/utils/custom_dialog.dart';
+import 'package:gamefinity/mvc/utils/alert_dialog.dart';
+import 'package:gamefinity/network/api_exceptions.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthProvider with ChangeNotifier {
   FirebaseAuth auth = FirebaseAuth.instance;
+
+  final alertDialog = CustomAlertDialog();
+
+  void checkException(DioException error, BuildContext context) {
+    ApiExceptions exceptions = ApiExceptions();
+    List<String> errorMessage = exceptions.getExceptionMessage(error);
+
+    alertDialog.showCustomAlert(
+      context: context,
+      title: errorMessage[0],
+      content: errorMessage[1],
+    );
+  }
 
   Stream<UsersModel?> get user {
     return auth.authStateChanges().map((User? user) => (user != null)
@@ -65,7 +80,6 @@ class AuthProvider with ChangeNotifier {
 
   Future<void> signInUserWithEmail(
       String emailAddress, String password, BuildContext context) async {
-    CustomDialog().showCustomDialog(context, 'جاري تسجيل الدخول');
     try {
       final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailAddress,
@@ -73,15 +87,20 @@ class AuthProvider with ChangeNotifier {
       );
       log('$credential');
     } on FirebaseAuthException catch (e) {
+      if (context.mounted) {
+        log('show time');
+        alertDialog.showCustomAlert(
+          context: context,
+          title: e.code,
+          content: e.message!,
+        );
+      }
       log(e.code);
       if (e.code == 'INVALID_LOGIN_CREDENTIALS') {
         log('No user found for that email.');
       } else if (e.code == 'wrong-password') {
         log('Wrong password provided for that user.');
       }
-    }
-    if (context.mounted) {
-      CustomDialog().popCurrentDialog(context);
     }
   }
 
