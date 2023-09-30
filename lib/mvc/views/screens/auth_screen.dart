@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:gamefinity/generated/l10n.dart';
 import 'package:gamefinity/mvc/controllers/auth_provider.dart';
 import 'package:gamefinity/mvc/controllers/settings_provider.dart';
+import 'package:gamefinity/mvc/utils/custom_dialog.dart';
 import 'package:lottie/lottie.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:particles_flutter/particles_flutter.dart';
@@ -42,12 +43,16 @@ class AuthScreenState extends State<AuthScreen> {
       formKey.currentState!.save();
       log("${formData['username']}, ${formData['password']}");
       if (isLogin) {
+        CustomDialog().showCustomDialog(context, 'جاري تسجيل الدخول');
+
         provider.signInUserWithEmail(
           formData['username'],
           formData['password'],
           context,
         );
       } else {
+        CustomDialog().showCustomDialog(context, 'جاري تسجيل حساب جديد');
+
         provider.createUserWithEmail(
           formData['username'],
           formData['password'],
