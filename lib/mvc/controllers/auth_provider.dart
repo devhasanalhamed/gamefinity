@@ -5,7 +5,8 @@ import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gamefinity/mvc/models/users_model.dart';
-import 'package:gamefinity/mvc/utils/alert_dialog.dart';
+import 'package:gamefinity/utils/alert_dialog.dart';
+import 'package:gamefinity/utils/custom_dialog.dart';
 import 'package:gamefinity/network/api_exceptions.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -60,18 +61,31 @@ class AuthProvider with ChangeNotifier {
     }
   }
 
-  Future<void> createUserWithEmail(String emailAddress, String password) async {
+  Future<void> createUserWithEmail(
+      String emailAddress, String password, BuildContext context) async {
     try {
       UserCredential userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
               email: emailAddress, password: password);
 
       log('$userCredential');
+      if (context.mounted) {
+        CustomDialog().popCurrentDialog(context);
+      }
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
+      if (context.mounted) {
+        CustomDialog().popCurrentDialog(context);
+        alertDialog.showCustomAlert(
+          context: context,
+          title: e.code,
+          content: e.message!,
+        );
+      }
+      log(e.code);
+      if (e.code == 'INVALID_LOGIN_CREDENTIALS') {
+        log('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        log('Wrong password provided for that user.');
       }
     } catch (e) {
       print(e);
@@ -86,9 +100,12 @@ class AuthProvider with ChangeNotifier {
         password: password,
       );
       log('$credential');
+      if (context.mounted) {
+        CustomDialog().popCurrentDialog(context);
+      }
     } on FirebaseAuthException catch (e) {
       if (context.mounted) {
-        log('show time');
+        CustomDialog().popCurrentDialog(context);
         alertDialog.showCustomAlert(
           context: context,
           title: e.code,
