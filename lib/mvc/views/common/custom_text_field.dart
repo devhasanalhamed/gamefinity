@@ -1,12 +1,19 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatefulWidget {
   final String title;
   final bool obSecure;
+  final Function? onSave;
+  final String? updateKey;
+
   const CustomTextField({
     Key? key,
     required this.title,
     required this.obSecure,
+    this.updateKey,
+    this.onSave,
   }) : super(key: key);
 
   @override
@@ -44,7 +51,7 @@ class CustomTextFieldState extends State<CustomTextField> {
             ),
           ),
           obscureText: widget.obSecure,
-          onSaved: (newValue) => {},
+          onSaved: (v) => widget.onSave!(widget.updateKey, v),
         ),
         const SizedBox(height: 16),
       ],
