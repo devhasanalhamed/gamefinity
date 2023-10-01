@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:gamefinity/generated/l10n.dart';
 import 'package:gamefinity/mvc/controllers/auth_provider.dart';
 import 'package:gamefinity/mvc/controllers/settings_provider.dart';
-import 'package:gamefinity/mvc/utils/custom_dialog.dart';
+import 'package:gamefinity/utils/custom_dialog.dart';
 import 'package:lottie/lottie.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:particles_flutter/particles_flutter.dart';
@@ -56,6 +56,7 @@ class AuthScreenState extends State<AuthScreen> {
         provider.createUserWithEmail(
           formData['username'],
           formData['password'],
+          context,
         );
       }
     }
@@ -186,6 +187,7 @@ class AuthScreenState extends State<AuthScreen> {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                             ),
+                            obscureText: true,
                             onSaved: (newValue) =>
                                 formData.addAll({'password': newValue}),
                           ),
@@ -216,6 +218,7 @@ class AuthScreenState extends State<AuthScreen> {
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                               ),
+                              obscureText: true,
                               onSaved: (newValue) => formData
                                   .addAll({'confirmPassword': newValue}),
                             ),
