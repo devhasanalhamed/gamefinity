@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:gamefinity/generated/l10n.dart';
 import 'package:gamefinity/mvc/controllers/auth_provider.dart';
 import 'package:gamefinity/mvc/controllers/settings_provider.dart';
+import 'package:gamefinity/mvc/views/common/custom_text_field.dart';
 import 'package:gamefinity/utils/custom_dialog.dart';
 import 'package:lottie/lottie.dart';
 import 'package:lucide_icons/lucide_icons.dart';
@@ -128,99 +129,26 @@ class AuthScreenState extends State<AuthScreen> {
                     key: formKey,
                     child: AnimatedContainer(
                       duration: const Duration(milliseconds: 300),
-                      height: isLogin ? 160 : 240,
+                      height: isLogin ? 170 : 250,
                       child: ListView(
-                        padding: EdgeInsets.zero,
+                        padding: const EdgeInsets.only(top: 10),
                         physics: const NeverScrollableScrollPhysics(),
                         children: [
-                          TextFormField(
+                          CustomTextField(
                             key: UniqueKey(),
-                            decoration: InputDecoration(
-                              label: Text(S.of(context).email),
-                              floatingLabelStyle: const TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  color: Colors.orange,
-                                  width: 2.0,
-                                ),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  width: 2.0,
-                                ),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            onSaved: (newValue) =>
-                                formData.addAll({'username': newValue}),
+                            title: S.of(context).email,
+                            obSecure: false,
                           ),
-                          const SizedBox(height: 16),
-                          TextFormField(
+                          CustomTextField(
                             key: UniqueKey(),
-                            decoration: InputDecoration(
-                              label: Text(S.of(context).password),
-                              floatingLabelStyle: const TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  color: Colors.orange,
-                                  width: 2.0,
-                                ),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  width: 2.0,
-                                ),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            obscureText: true,
-                            onSaved: (newValue) =>
-                                formData.addAll({'password': newValue}),
+                            title: S.of(context).password,
+                            obSecure: true,
                           ),
-                          const SizedBox(height: 16),
                           if (!isLogin)
-                            TextFormField(
+                            CustomTextField(
                               key: UniqueKey(),
-                              decoration: InputDecoration(
-                                label: Text(S.of(context).confirmPassword),
-                                floatingLabelStyle: const TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Colors.orange,
-                                    width: 2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                              ),
-                              obscureText: true,
-                              onSaved: (newValue) => formData
-                                  .addAll({'confirmPassword': newValue}),
+                              title: S.of(context).confirmPassword,
+                              obSecure: true,
                             ),
                         ],
                       ),
