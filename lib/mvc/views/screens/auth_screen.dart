@@ -20,7 +20,7 @@ class AuthScreen extends StatefulWidget {
 }
 
 class AuthScreenState extends State<AuthScreen> {
-  late GlobalKey<FormState> formKey;
+  late GlobalKey<FormState> formKey = GlobalKey();
   bool isLogin = true;
 
   void toggleState() {
@@ -30,16 +30,16 @@ class AuthScreenState extends State<AuthScreen> {
   }
 
   @override
-  void initState() {
-    formKey = GlobalKey();
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final provider = Provider.of<AuthProvider>(context, listen: false);
     // final screenSize = MediaQuery.of(context).size;
     final formData = {};
+
+    void updateForm(String key, String value) {
+      log(key + value);
+      formData.addAll({key: value});
+    }
+
     void onSubmitForm() {
       formKey.currentState!.save();
       log("${formData['username']}, ${formData['password']}");
@@ -138,11 +138,15 @@ class AuthScreenState extends State<AuthScreen> {
                             key: UniqueKey(),
                             title: S.of(context).email,
                             obSecure: false,
+                            updateKey: 'username',
+                            onSave: updateForm,
                           ),
                           CustomTextField(
                             key: UniqueKey(),
                             title: S.of(context).password,
                             obSecure: true,
+                            updateKey: 'password',
+                            onSave: updateForm,
                           ),
                           if (!isLogin)
                             CustomTextField(
