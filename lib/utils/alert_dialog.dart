@@ -7,8 +7,24 @@ class CustomAlertDialog {
     required String content,
   }) {
     return AlertDialog(
-      title: Text(title),
-      content: Text(content),
+      title: Text(
+        title,
+        style: const TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(25),
+      ),
+      backgroundColor: Colors.black,
+      content: Text(
+        content,
+        style: const TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
       actions: [
         TextButton(
           onPressed: () {

@@ -12,13 +12,13 @@ class CustomDialog {
         alignment: Alignment.center,
         backgroundColor: Colors.white,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(25),
         ),
         child: Container(
           height: 200,
           width: 200,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(25),
             gradient: const LinearGradient(
               colors: [
                 Colors.indigo,
@@ -53,6 +53,8 @@ class CustomDialog {
   }
 
   void popCurrentDialog(BuildContext context) {
-    Navigator.of(context).pop();
+    if (Navigator.canPop(context)) {
+      Navigator.of(context).pop();
+    }
   }
 }
