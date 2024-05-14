@@ -1,12 +1,12 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
-import 'package:gamefinity/generated/l10n.dart';
+import 'package:gamefinity/core/helpers/api_handler.dart';
 import 'package:gamefinity/core/helpers/size_config.dart';
+import 'package:gamefinity/features/game/data/game_view_model.dart';
+import 'package:gamefinity/generated/l10n.dart';
 import 'package:gamefinity/mvc/controllers/settings_provider.dart';
 import 'package:gamefinity/mvc/models/products_model.dart';
 import 'package:gamefinity/mvc/views/screens/all_products_screen.dart';
-import 'package:gamefinity/core/helpers/api_handler.dart';
-import 'package:gamefinity/mvc/views/widgets/product_widget.dart';
 import 'package:gamefinity/mvc/views/widgets/sale_widget.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:page_transition/page_transition.dart';
@@ -55,6 +55,13 @@ class HomepageState extends State<Homepage> {
       child: Column(
         children: [
           SizedBox(height: SizeConfig.safeBlockVertical! * 2),
+          TextButton(
+            onPressed: () {
+              final pro = Provider.of<GameViewModel>(context, listen: false);
+              pro.getGameList();
+            },
+            child: Text('data'),
+          ),
           TextField(
             controller: textEditingController,
             keyboardType: TextInputType.text,
@@ -152,23 +159,48 @@ class HomepageState extends State<Homepage> {
                           child: Text(S.of(context).itIsEmpty),
                         );
                       } else {
-                        return GridView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: snapshot.data!.length,
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: SizeConfig.screenWidth! ~/ 150,
-                            mainAxisExtent: 280,
-                            crossAxisSpacing: 8.0,
-                            mainAxisSpacing: 8.0,
+                        return Consumer<GameViewModel>(
+                          builder: (context, gameProvider, child) =>
+                              GridView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: gameProvider.gameList.length,
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: SizeConfig.screenWidth! ~/ 150,
+                              mainAxisExtent: 280,
+                              crossAxisSpacing: 8.0,
+                              mainAxisSpacing: 8.0,
+                            ),
+                            itemBuilder: (context, index) {
+                              return Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8.0,
+                                ),
+                                decoration: BoxDecoration(
+                                  borderRadius: const BorderRadius.all(
+                                    Radius.circular(15),
+                                  ),
+                                  image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: NetworkImage(
+                                        gameProvider.gameList[index].imagePath),
+                                  ),
+                                ),
+                                child: Align(
+                                  alignment: Alignment.bottomLeft,
+                                  child: Text(
+                                    gameProvider.gameList[index].name,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18.0,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
                           ),
-                          itemBuilder: (context, index) {
-                            return ChangeNotifierProvider.value(
-                              value: snapshot.data![index],
-                              child: const ProductWidget(),
-                            );
-                          },
                         );
                       }
                     },
