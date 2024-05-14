@@ -10,10 +10,13 @@ import 'package:gamefinity/mvc/views/screens/no_connection.dart';
 import 'package:provider/provider.dart';
 
 import 'core/global/theme.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await FirebaseAPI().initNotifications();
   await SharedPref.initSharedPref();
   runApp(const MyApp());
