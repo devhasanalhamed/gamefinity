@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:gamefinity/core/helpers/firebase_api.dart';
 import 'package:gamefinity/core/services/shared_preferences.dart';
+import 'package:gamefinity/features/game/data/game_view_model.dart';
 import 'package:gamefinity/generated/l10n.dart';
 import 'package:gamefinity/mvc/controllers/auth_provider.dart';
 import 'package:gamefinity/mvc/controllers/settings_provider.dart';
@@ -30,6 +31,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(
+          create: (ctx) => GameViewModel()..getGameList(),
+        ),
         ChangeNotifierProvider(
           create: (ctx) => SettingsProvider(),
         ),
