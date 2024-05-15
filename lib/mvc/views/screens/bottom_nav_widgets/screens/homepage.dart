@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gamefinity/core/helpers/api_handler.dart';
 import 'package:gamefinity/core/helpers/size_config.dart';
 import 'package:gamefinity/features/game/logic/game_view_model.dart';
+import 'package:gamefinity/features/game/view/widgets/game_card.dart';
 import 'package:gamefinity/generated/l10n.dart';
 import 'package:gamefinity/mvc/controllers/settings_provider.dart';
 import 'package:gamefinity/mvc/models/products_model.dart';
@@ -173,32 +174,8 @@ class HomepageState extends State<Homepage> {
                               mainAxisSpacing: 8.0,
                             ),
                             itemBuilder: (context, index) {
-                              return Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 8.0,
-                                ),
-                                decoration: BoxDecoration(
-                                  borderRadius: const BorderRadius.all(
-                                    Radius.circular(15),
-                                  ),
-                                  image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: NetworkImage(gameProvider.gameList
-                                        .elementAt(index)
-                                        .backgroundImage),
-                                  ),
-                                ),
-                                child: Align(
-                                  alignment: Alignment.bottomLeft,
-                                  child: Text(
-                                    gameProvider.gameList.elementAt(index).name,
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18.0,
-                                    ),
-                                  ),
-                                ),
+                              return GameCard(
+                                game: gameProvider.gameList.elementAt(index),
                               );
                             },
                           ),
