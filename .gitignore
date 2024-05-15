@@ -46,3 +46,4 @@ pubspec.lock
 *.lock
 pubspec.lock
 pubspec.lock
+.env
