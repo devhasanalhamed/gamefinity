@@ -4,6 +4,7 @@ import 'package:gamefinity/features/game/data/model/game_model.dart';
 
 class GameCard extends StatefulWidget {
   final GameModel game;
+
   const GameCard({
     super.key,
     required this.game,
@@ -28,7 +29,7 @@ class _GameCardState extends State<GameCard> {
         Radius.circular(15),
       ),
       child: Stack(
-        fit: StackFit.expand,
+        alignment: Alignment.bottomCenter,
         children: [
           ClipRRect(
             borderRadius: const BorderRadius.all(
@@ -37,6 +38,8 @@ class _GameCardState extends State<GameCard> {
             child: CachedNetworkImage(
               imageUrl: widget.game.backgroundImage,
               fit: BoxFit.cover,
+              height: double.infinity,
+              width: double.infinity,
             ),
           ),
           Container(
@@ -73,29 +76,53 @@ class _GameCardState extends State<GameCard> {
           Positioned(
             right: 15,
             top: 15,
-            child: Text(
-              widget.game.rating.toStringAsFixed(1),
+            child: Container(
+              padding: const EdgeInsets.all(4.0),
+              decoration: BoxDecoration(
+                color: Colors.black54,
+                borderRadius: BorderRadius.circular(8.0),
+                border: Border.all(
+                  color: Colors.amber,
+                  width: 2.0,
+                ),
+              ),
+              child: Text(
+                widget.game.rating.toStringAsFixed(1),
+                style: const TextStyle(
+                  color: Colors.amber,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ),
-          if (clicked)
-            AnimatedContainer(
-              duration: Duration(milliseconds: clicked ? 300 : 0),
-              margin: const EdgeInsets.only(
-                top: 20.0,
-              ),
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(15),
-                ),
-                color: Colors.black87,
-              ),
-              child: ListView(
-                shrinkWrap: true,
-                children: [
-                  Text(widget.game.released),
-                ],
-              ),
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 300),
+            height: clicked ? 100 : 0,
+            margin: const EdgeInsets.only(
+              top: 20.0,
             ),
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.all(
+                Radius.circular(15),
+              ),
+              color: Colors.black87,
+            ),
+            child: ListView(
+              shrinkWrap: true,
+              children: [
+                Text(widget.game.released),
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: widget.game.tags.length,
+                  itemBuilder: (context, index) => CachedNetworkImage(
+                    imageUrl: widget.game.tags[index].imageBackground,
+                  ),
+                ),
+                Text(widget.game.genres.length.toString()),
+              ],
+            ),
+          ),
         ],
       ),
     );
