@@ -2,7 +2,7 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:gamefinity/core/helpers/api_handler.dart';
 import 'package:gamefinity/core/helpers/size_config.dart';
-import 'package:gamefinity/features/game/data/game_view_model.dart';
+import 'package:gamefinity/features/game/logic/game_view_model.dart';
 import 'package:gamefinity/generated/l10n.dart';
 import 'package:gamefinity/mvc/controllers/settings_provider.dart';
 import 'package:gamefinity/mvc/models/products_model.dart';
