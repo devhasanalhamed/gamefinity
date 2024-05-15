@@ -1,9 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:gamefinity/core/helpers/firebase_api.dart';
 import 'package:gamefinity/core/services/shared_preferences.dart';
-import 'package:gamefinity/features/game/data/game_view_model.dart';
+import 'package:gamefinity/features/game/logic/game_view_model.dart';
 import 'package:gamefinity/generated/l10n.dart';
 import 'package:gamefinity/mvc/controllers/auth_provider.dart';
 import 'package:gamefinity/mvc/controllers/settings_provider.dart';
@@ -20,6 +21,7 @@ void main() async {
   );
   await FirebaseAPI().initNotifications();
   await SharedPref.initSharedPref();
+  await dotenv.load(fileName: '.env');
   runApp(const MyApp());
 }
 
