@@ -1,24 +1,33 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:gamefinity/features/game/data/repository/game_base_repository.dart';
 
+import '../../../core/enum/request_state.dart';
+import '../data/datasource/game_data_source.dart';
 import '../data/model/game_model.dart';
 
 class GameViewModel extends ChangeNotifier {
-  List<GameModel> gameList = [];
+  final GameBaseRepository gameBaseRepository = GameDataSource();
 
-  Future<void> getGameList() async {
-    print("heel");
-    final dio = Dio();
+  int page = 1;
+  final Set<GameModel> _gameList = {};
+  RequestState requestState = RequestState.loading;
+  bool fetchGamesListIsBusy = false;
+  String fetchGamesListErrorMessage = '';
+  Set<GameModel> get gameList => _gameList;
 
-    final result = await dio.get('https://api.rawg.io/api/games?key=');
-
-    final responseData = result.data['results'] as List;
-    gameList.addAll(
-      responseData.map(
-        (game) => GameModel.fromJson(game),
-      ),
-    );
-
+  Future<void> fetchGamesList() async {
+    if (fetchGamesListIsBusy) return;
+    fetchGamesListIsBusy = true;
+    final result = await gameBaseRepository.fetchGames({'page': page});
+    if (result.$2 == null) {
+      _gameList.addAll({...result.$1});
+      page += 1;
+      requestState = RequestState.done;
+    } else {
+      fetchGamesListErrorMessage = result.$2!;
+      requestState = RequestState.error;
+    }
+    fetchGamesListIsBusy = false;
     notifyListeners();
   }
 }

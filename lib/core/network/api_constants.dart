@@ -1,8 +1,14 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 // Api constants
 
 class ApiConstants {
-  // base api
-  static String base = 'https://api.rawg.io/api';
+  /// api key
+  static String apiKey = dotenv.env['API_KEY'] ?? 'no_key';
 
-  // games
+  /// base api
+  static String base = dotenv.env['BASE_URL'] ?? 'no_url';
+
+  /// games
+  static String games = '/games';
 }

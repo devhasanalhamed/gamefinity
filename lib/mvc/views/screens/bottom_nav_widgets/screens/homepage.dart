@@ -58,7 +58,7 @@ class HomepageState extends State<Homepage> {
           TextButton(
             onPressed: () {
               final pro = Provider.of<GameViewModel>(context, listen: false);
-              pro.getGameList();
+              pro.fetchGamesList();
             },
             child: Text('data'),
           ),
@@ -183,14 +183,15 @@ class HomepageState extends State<Homepage> {
                                   ),
                                   image: DecorationImage(
                                     fit: BoxFit.cover,
-                                    image: NetworkImage(
-                                        gameProvider.gameList[index].imagePath),
+                                    image: NetworkImage(gameProvider.gameList
+                                        .elementAt(index)
+                                        .backgroundImage),
                                   ),
                                 ),
                                 child: Align(
                                   alignment: Alignment.bottomLeft,
                                   child: Text(
-                                    gameProvider.gameList[index].name,
+                                    gameProvider.gameList.elementAt(index).name,
                                     style: const TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,

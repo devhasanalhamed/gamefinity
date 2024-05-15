@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (ctx) => GameViewModel()..getGameList(),
+          create: (ctx) => GameViewModel()..fetchGamesList(),
         ),
         ChangeNotifierProvider(
           create: (ctx) => SettingsProvider(),
@@ -59,6 +59,8 @@ class MyApp extends StatelessWidget {
           supportedLocales: S.delegate.supportedLocales,
           title: 'Gamefinity',
           debugShowCheckedModeBanner: false,
+          themeMode: ThemeMode.dark,
+          darkTheme: ThemeData.dark(),
           theme: ThemeData(
             useMaterial3: true,
             fontFamily: 'Tajawal',
