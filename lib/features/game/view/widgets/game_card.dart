@@ -95,34 +95,6 @@ class _GameCardState extends State<GameCard> {
               ),
             ),
           ),
-          AnimatedContainer(
-            duration: const Duration(milliseconds: 300),
-            height: clicked ? 100 : 0,
-            margin: const EdgeInsets.only(
-              top: 20.0,
-            ),
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(
-                Radius.circular(15),
-              ),
-              color: Colors.black87,
-            ),
-            child: ListView(
-              shrinkWrap: true,
-              children: [
-                Text(widget.game.released),
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: widget.game.tags.length,
-                  itemBuilder: (context, index) => CachedNetworkImage(
-                    imageUrl: widget.game.tags[index].imageBackground,
-                  ),
-                ),
-                Text(widget.game.genres.length.toString()),
-              ],
-            ),
-          ),
         ],
       ),
     );
