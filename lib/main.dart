@@ -66,7 +66,6 @@ class MyApp extends StatelessWidget {
             fontFamily: 'Tajawal',
             scaffoldBackgroundColor: lightScaffoldColor,
             primaryColor: lightCardColor,
-            backgroundColor: lightBackgroundColor,
             appBarTheme: AppBarTheme(
               iconTheme: IconThemeData(
                 color: lightIconsColor,
